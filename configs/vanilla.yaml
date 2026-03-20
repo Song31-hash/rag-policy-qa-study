@@ -1,0 +1,16 @@
+# Vanilla LLM (retrieval 없음)
+embedding_model: "text-embedding-3-small"
+embedding_dimension: null
+
+llm_model: "gpt-4o-mini"
+temperature: 0
+
+paths:
+  raw: "data/raw"
+  processed: "data/processed"
+  dataset: "data/dataset"
+  indexes: "data/indexes"
+  experiments: "experiments"
+  results: "results"
+
+use_retrieval: false

@@ -1,0 +1,21 @@
+﻿question_id,gold_256,pred_256,acc_256,error_256,retrieval_256,gold_512,pred_512,acc_512,error_512,retrieval_512,gold_1024,pred_1024,acc_1024,error_1024,retrieval_1024
+Q-01,no,no,True,,False,no,no,True,,False,no,no,True,,False
+Q-02,no,yes,False,retrieval_failure,False,no,no,True,,False,no,"직원 6명을 둔 음식점은 소상공인 기준에 부합하지 않습니다. 음식점 업종의 경우 상시 근로자 수 기준이 5인 미만이기 때문에, 6명은 소상공인으로 인정되지 않습니다.",False,retrieval_failure,False
+Q-03,no,no,True,,False,no,no,True,,False,no,no,True,,False
+Q-04,no,no,True,,False,no,no,True,,False,no,no,True,,False
+Q-05,no,no,True,,False,no,no,True,,False,no,no,True,,False
+Q-06,yes,yes,True,,False,yes,yes,True,,False,yes,yes,True,,False
+Q-07,selection_required,selection_required,True,,False,selection_required,selection_required,True,,False,selection_required,selection_required,True,,False
+Q-08,yes,yes,True,,False,yes,yes,True,,False,yes,yes,True,,False
+Q-09,yes,no,False,retrieval_failure,False,yes,yes,True,,False,yes,"운수업의 상시 근로자 수 기준은 10명 미만이므로, 8명의 직원이 있는 운수업 사업자는 이 기준을 충족합니다. 그러나 주된 사업이 운수업이므로, 부업인 공유오피스 임대업은 상시 근로자 수 기준에 영향을 미치지 않습니다. 따라서 자격이 됩니다.",False,retrieval_failure,False
+Q-10,no,"2개월 전 카드 대금 연체가 5일간 있었으나 지금은 모두 갚았다면, 신용 정보상 결격 사유가 아닙니다. 연체가 10일 이상 지속되거나 30일 이상 연체가 1회 이상 발생해야 결격 사유가 됩니다.",False,retrieval_failure,False,no,no,True,,False,no,no,True,,False
+Q-11,yes,yes,True,,False,yes,no,False,retrieval_failure,False,yes,no,False,retrieval_failure,False
+Q-12,yes,"제공된 맥락에는 부동산업에 대한 구체적인 지원 대상 여부가 명시되어 있지 않으므로, 지원 대상 업종에 해당하는지 여부를 판단할 수 없습니다.",False,retrieval_failure,False,yes,제공된 맥락에서는 부동산업 중 공유오피스를 운영하는 경우에 대한 구체적인 언급이 없습니다. 따라서 지원 대상 업종에 해당하는지 여부는 명확하지 않습니다. 추가적인 정보가 필요합니다.,False,retrieval_failure,False,yes,no,False,retrieval_failure,False
+Q-13,no,no,True,,False,no,no,True,,False,no,no,True,,False
+Q-14,yes,yes,True,,False,yes,no,False,retrieval_failure,False,yes,no,False,retrieval_failure,False
+Q-15,yes,yes,True,,False,yes,yes,True,,False,yes,yes,True,,False
+Q-16,no,"네, 최근 3개월 내에 15일간 연체가 1회 발생한 경우에는 신청이 제한됩니다. 10일 이상 연체가 4회 이상 발생한 경우에 해당하지 않지만, 30일 이상 연체가 1회 이상 발생한 경우에 해당하지 않기 때문에 신청이 제한되지 않습니다.",False,retrieval_failure,False,no,"네, 최근 3개월 내에 15일간 연체가 1회 발생한 경우, 신청이 제한됩니다.",False,retrieval_failure,False,no,"네, 최근 3개월 내에 15일간 연체가 1회 발생한 경우, 신청이 제한됩니다. 30일 이상 연체가 1회 이상 발생한 경우에 해당하지 않지만, 10일 이상 연체가 4회 이상 발생한 경우에 해당하지 않으므로, 연체 기준에 따라 신청이 제한되지 않습니다.",False,retrieval_failure,False
+Q-17,yes,no,False,retrieval_failure,False,yes,no,False,retrieval_failure,False,yes,yes,True,,False
+Q-18,no,no,True,,False,no,no,True,,False,no,no,True,,False
+Q-19,yes,yes,True,,False,yes,yes,True,,False,yes,yes,True,,False
+Q-20,no,selection_required,False,retrieval_failure,False,no,selection_required,False,retrieval_failure,False,no,selection_required,False,retrieval_failure,False

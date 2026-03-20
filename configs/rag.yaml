@@ -1,0 +1,20 @@
+# RAG 파이프라인 설정
+embedding_model: "text-embedding-3-small"
+embedding_dimension: null
+
+llm_model: "gpt-4o-mini"
+temperature: 0
+
+paths:
+  raw: "data/raw"
+  processed: "data/processed"
+  dataset: "data/dataset"
+  indexes: "data/indexes"
+  experiments: "experiments"
+  results: "results"
+
+# RAG 전용
+chunk_size: 512
+chunk_overlap: 64
+top_k: 5
+use_retrieval: true

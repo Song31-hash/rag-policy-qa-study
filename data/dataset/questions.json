@@ -1,0 +1,173 @@
+{
+  "test_suite_metadata": {
+    "test_suite_name": "2025 소상공인 정책자금 자격판정 골든 벤치마크",
+    "reference_rule_version": "v1.3",
+    "evaluation_protocol": {
+      "expected_decision_enum": ["yes", "no", "selection_required"],
+      "description": "정책 문서의 명시적 규정 및 예외 조항을 근거로 한 최종 자격 판정 결과"
+    }
+  },
+  "questions": [
+    {
+      "id": "Q-01",
+      "category": "threshold_boundary",
+      "target_eligibility": "Eligibility-02",
+      "question": "제조업을 운영하며 상시 근로자가 딱 10명인 개인사업자입니다. 이번 상생성장지원자금을 신청할 수 있나요?",
+      "expected_decision": "no",
+      "reasoning_point": "소상공인기본법 및 시행계획에 따라 제조업의 소상공인 상시 근로자 수 기준은 '10인 미만'이어야 하므로, 10명인 경우 자격 요건을 충족하지 못함 [1], [2]."
+    },
+    {
+      "id": "Q-02",
+      "category": "threshold_boundary",
+      "target_eligibility": "Eligibility-02",
+      "question": "직원 6명을 둔 음식점입니다. 소상공인 기준에 부합하여 신청이 가능한가요?",
+      "expected_decision": "no",
+      "reasoning_point": "제조업 등을 제외한 '그 밖의 업종'인 음식점업은 상시 근로자 수가 '5인 미만'이어야 하므로, 6명은 기준을 초과하여 신청이 불가함 [1], [2]."
+    },
+    {
+      "id": "Q-03",
+      "category": "entity_type",
+      "target_eligibility": "Eligibility-04",
+      "question": "지역 소상공인들이 모여 만든 비영리 사회적 협동조합입니다. 영리 활동을 하고 있는데 지원 대상이 되나요?",
+      "expected_decision": "no",
+      "reasoning_point": "정책자금 지원 대상은 영리기업으로 한정되며, 비영리 사업자(개인, 법인, 조합 등)는 실질적인 영리 활동 여부와 관계없이 지원 대상에서 제외됨 [3], [4], [5]."
+    },
+    {
+      "id": "Q-04",
+      "category": "industry_restriction",
+      "target_eligibility": "Eligibility-05",
+      "question": "현재 일반 유흥주점을 운영 중인 소상공인입니다. 이번 상생성장지원자금 신청이 가능할까요?",
+      "expected_decision": "no",
+      "reasoning_point": "표준산업분류상 일반유흥주점업(56211)은 소상공인 정책자금 융자제외 대상 업종에 해당함 [6], [7], [8]."
+    },
+    {
+      "id": "Q-05",
+      "category": "program_track",
+      "target_eligibility": "Eligibility-06",
+      "question": "온라인 판매는 하지 않고 오프라인 매장만 운영 중인 소상공인입니다. 상생성장지원자금 신청이 가능한가요?",
+      "expected_decision": "no",
+      "reasoning_point": "상생성장지원자금은 '온라인 플랫폼 입점 소상공인'을 지원 목적으로 하며, 플랫폼 입점 증빙이 필수 자격 요건임 [9], [3], [10]."
+    },
+    {
+      "id": "Q-06",
+      "category": "conditional_exception",
+      "target_eligibility": "Eligibility-08",
+      "question": "지방세가 일부 체납되어 있으나 현재 징수유예 결정을 받은 상태입니다. 자격 요건을 충족하나요?",
+      "expected_decision": "yes",
+      "reasoning_point": "세금 체납 중이라도 징수유예(납부고지의 유예, 납부기한 등 연장) 승인을 받은 경우에는 예외적으로 대출 신청 자격을 인정함 [11], [12]."
+    },
+    {
+      "id": "Q-07",
+      "category": "track_matching",
+      "target_eligibility": "Eligibility-07",
+      "question": "쿠팡과 상생협약을 맺어 추천을 받은 유망 소상공인입니다. 어떤 트랙으로 신청해야 하나요?",
+      "expected_decision": "selection_required",
+      "metadata": { "selected_option": "상생형" },
+      "reasoning_point": "공단과 상생 협약을 체결한 플랫폼사(쿠팡 등)의 추천을 받은 경우 지원 대상 유형 중 '①-1 (상생형)' 트랙에 해당함 [9], [3]."
+    },
+    {
+      "id": "Q-08",
+      "category": "conditional_exception",
+      "target_eligibility": "Eligibility-10",
+      "question": "최근 4년 동안 일반 소상공인 정책자금을 이미 3번 받았습니다. 이번에 시설자금으로 추가 신청이 될까요?",
+      "expected_decision": "yes",
+      "reasoning_point": "최근 5년 이내 3회 이상 지원받은 경우라도, '시설자금'으로 신청 시에는 1회에 한해 추가 지원이 가능한 예외 규정이 존재함 [13], [14]."
+    },
+    {
+      "id": "Q-09",
+      "category": "multi_criteria",
+      "target_eligibility": ["Eligibility-02", "Eligibility-05"],
+      "question": "직원 8명을 둔 운수업 사업자인데 공유오피스 임대업을 부업으로 병행하고 있습니다. 자격이 되나요?",
+      "expected_decision": "yes",
+      "reasoning_point": "운수업은 상시 근로자 10인 미만 기준을 충족하며, 부동산업 중 비주거용건물임대업(공유오피스)은 융자 제외 업종의 예외로 인정되어 신청 가능함 [6], [7], [1], [2], [8]."
+    },
+    {
+      "id": "Q-10",
+      "category": "temporal_condition",
+      "target_eligibility": "Eligibility-09",
+      "question": "2개월 전 카드 대금 연체가 5일간 있었으나 지금은 모두 갚았습니다. 신용 정보상 결격 사유인가요?",
+      "expected_decision": "no",
+      "reasoning_point": "연체 결격 기준은 최근 3개월 내 '30일 이상 1회' 또는 '10일 이상 4회'이므로, 5일간 1회의 연체 기록은 신청 제한 사유에 해당하지 않음 [12], [15]."
+    },
+    {
+      "id": "Q-11",
+      "category": "threshold_boundary",
+      "target_eligibility": "Eligibility-02",
+      "question": "직원이 9명인 건설업체 개인사업자입니다. 상시 근로자 수 기준을 충족하여 신청이 가능한가요?",
+      "expected_decision": "yes",
+      "reasoning_point": "건설업은 상시 근로자 수 '10인 미만'이 소상공인 기준이므로 9명은 자격 요건을 충족함 [1], [2]."
+    },
+    {
+      "id": "Q-12",
+      "category": "industry_restriction",
+      "target_eligibility": "Eligibility-05",
+      "question": "부동산업 중 공유오피스를 운영하고 있습니다. 지원 대상 업종에 해당하나요?",
+      "expected_decision": "yes",
+      "reasoning_point": "부동산업(68)은 원칙적으로 제외이나, 비주거용건물임대업(68112) 중 공유오피스 및 공유주방 영위 시 예외적으로 허용됨 [6], [7], [8]."
+    },
+    {
+      "id": "Q-13",
+      "category": "entity_type",
+      "target_eligibility": "Eligibility-04",
+      "question": "외국법인의 한국 지점(Branch)을 운영 중인 소상공인입니다. 신청 자격이 있나요?",
+      "expected_decision": "no",
+      "reasoning_point": "정책자금 지원 대상에서 외국법인의 본·지점 및 영리법인의 지점은 명시적으로 제외됨 [16]."
+    },
+    {
+      "id": "Q-14",
+      "category": "conditional_exception",
+      "target_eligibility": "Eligibility-05",
+      "question": "특별재난지역에 소재한 약국입니다. 제외 업종이지만 예외적으로 지원이 가능한가요?",
+      "expected_decision": "yes",
+      "reasoning_point": "약국은 제외 업종이나 '특별재난지역 소재' 시 예외적으로 재해자금 지원 대상에 포함됨 [17], [18]."
+    },
+    {
+      "id": "Q-15",
+      "category": "financial_restriction",
+      "target_eligibility": "Eligibility-08",
+      "question": "지방세를 체납 중이나 현재 '징수유예' 승인을 받은 상태입니다. 신청이 가능할까요?",
+      "expected_decision": "yes",
+      "reasoning_point": "지방세징수법에 따른 징수유예(납부기한 연장 포함)를 받은 경우 대출 신청이 가능한 예외에 해당함 [11], [12]."
+    },
+    {
+      "id": "Q-16",
+      "category": "temporal_condition",
+      "target_eligibility": "Eligibility-09",
+      "question": "최근 3개월 내에 15일간 연체가 1회 있었습니다. 이 경우 신청이 제한되나요?",
+      "expected_decision": "no",
+      "reasoning_point": "최근 3개월 내 '30일 이상 1회' 또는 '10일 이상 4회'부터 제한되므로, 15일 1회 연체는 신청이 가능함 [12], [15]."
+    },
+    {
+      "id": "Q-17",
+      "category": "financial_restriction",
+      "target_eligibility": "Eligibility-07",
+      "question": "부채비율이 800%이지만 사업을 시작한 지 5년 되었습니다. 신청 자격이 있나요?",
+      "expected_decision": "yes",
+      "reasoning_point": "부채비율 700% 초과 제한 규정은 업력 7년 이하 업체에 대해서는 적용하지 않음 [19], [20]."
+    },
+    {
+      "id": "Q-18",
+      "category": "entity_type",
+      "target_eligibility": "Eligibility-04",
+      "question": "법인격이 없는 친목 조합 형태의 사업자입니다. 지원 대상인가요?",
+      "expected_decision": "no",
+      "reasoning_point": "법인격 없는 조합은 비영리사업자로 간주되어 정책자금 지원 대상에서 제외됨 [4], [5]."
+    },
+    {
+      "id": "Q-19",
+      "category": "conditional_exception",
+      "target_eligibility": "Eligibility-10",
+      "question": "최근 5년 내 정책자금을 3번 받았습니다. 이번에 '시설자금'으로 신청하면 추가 지원이 가능한가요?",
+      "expected_decision": "yes",
+      "reasoning_point": "3회 이상 지원 업체라 하더라도 시설자금 신청 시에는 1회에 한해 추가 지원이 가능함 [13], [14]."
+    },
+    {
+      "id": "Q-20",
+      "category": "program_track",
+      "target_eligibility": "Eligibility-07",
+      "question": "25년 TOPS 프로그램 1단계(플랫폼 진출)에 선정되었습니다. TOPS형으로 신청 가능한가요?",
+      "expected_decision": "no",
+      "reasoning_point": "TOPS형 자격은 25년 TOPS 프로그램 중 반드시 '2단계(플랫폼 판매촉진)'에 선정된 경우에만 인정됨 [3]."
+    }
+  ]
+}

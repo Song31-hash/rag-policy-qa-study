@@ -1,0 +1,6 @@
+# 실험: chunk size 변인
+# python scripts/run_experiment.py --config configs/experiment/chunk_size.yaml --experiment chunk_size --run-name chunk_200
+_base_: "../rag.yaml"
+chunk_size: 200
+chunk_overlap: 32
+top_k: 5

@@ -1,0 +1,28 @@
+chunking:
+  chunk_size: 512
+  chunk_overlap: 64
+
+embedding:
+  model: text-embedding-3-small
+  dimension: 1536
+
+retrieval:
+  top_k: 5
+
+generation:
+  model: gpt-4o-mini
+  temperature: 0
+
+paths:
+  raw: data/raw
+  processed: data/processed
+  dataset: data/dataset
+
+  chunks_path: data/processed/chunks_chunk512.json
+  chunk_meta_path: data/processed/chunk_meta_chunk512.json
+  index_dir: data/indexes/chunk512
+
+  questions_path: data/dataset/questions.json
+  gold_path: data/dataset/gold_answers.json
+
+  output_dir: experiments/chunk_size/chunk512

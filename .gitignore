@@ -1,0 +1,29 @@
+### Environment
+.env
+.env.*
+.venv/
+venv/
+
+### Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+### FAISS / embeddings (regenerate)
+data/indexes/
+data/processed/
+
+### Large experiment outputs (derived; evaluation/config kept)
+experiments/**/predictions.json
+experiments/**/retrieved_*.json
+experiments/**/results.json
+
+### Jupyter
+.ipynb_checkpoints/
+
+### OS / editor
+*.DS_Store
+Thumbs.db
+.cursor/
+.vscode/

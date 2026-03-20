@@ -1,0 +1,14 @@
+{
+  "q1": {
+    "difficulty": "easy",
+    "type": "rule_lookup"
+  },
+  "q2": {
+    "difficulty": "easy",
+    "type": "rule_lookup"
+  },
+  "_schema": {
+    "difficulty": "easy | medium | hard",
+    "type": "rule_lookup | exception_rule | multi_rule"
+  }
+}

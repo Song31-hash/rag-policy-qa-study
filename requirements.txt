@@ -1,0 +1,7 @@
+# Research-grade RAG pipeline - fixed versions for reproducibility
+openai>=1.12.0
+faiss-cpu>=1.7.4
+python-docx>=1.1.0
+numpy>=1.24.0,<2.0.0
+pydantic>=2.0.0
+pyyaml>=6.0

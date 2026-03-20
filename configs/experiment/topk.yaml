@@ -1,0 +1,6 @@
+# 실험: top-k 변인
+# python scripts/run_experiment.py --config configs/experiment/topk.yaml --experiment topk --run-name k3
+_base_: "../rag.yaml"
+chunk_size: 512
+chunk_overlap: 64
+top_k: 3
