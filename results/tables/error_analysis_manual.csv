@@ -1,0 +1,6 @@
+﻿"question_id,category,gold_answer,model_answer,current_error_type,manual_error_type,retrieval_status,evidence_summary,note"
+"Q-02,threshold_boundary,no,yes,retrieval_failure,partial_retrieval,partial,""업종별 근로자 수 기준 섹션은 retrieved 되었으나 음식점(5인 미만) 규칙이 명확히 드러나지 않음"",""threshold 규칙 일부만 회수되어 모델이 기준을 잘못 일반화"""
+"Q-10,temporal_condition,no,yes,retrieval_failure,reasoning_failure,success,""최근 3개월 내 30일 이상 1회 또는 10일 이상 4회 기준이 retrieved chunk에 명시됨"",""retrieval은 성공했으나 모델이 규칙 적용 또는 정규화 실패"""
+"Q-12,industry_restriction,yes,판단불가,retrieval_failure,retrieval_failure,failure,""부동산업 중 공유오피스 예외 허용 규칙이 retrieved chunk 상위에 없음"",""핵심 예외 규칙이 retrieval되지 않아 판단 불가"""
+"Q-16,temporal_condition,no,yes,retrieval_failure,reasoning_failure,success,""30일 이상 1회 또는 10일 이상 4회 기준이 retrieved chunk에 포함됨"",""retrieval은 성공했으나 조건 해석 오류 발생"""
+"Q-20,program_track,no,selection_required,retrieval_failure,partial_retrieval,partial,""TOPS 프로그램 관련 설명은 있으나 2단계 선정 조건이 명확히 포함되지 않음"",""상위 개념은 retrieval 되었지만 결정적 세부 조건 누락"""

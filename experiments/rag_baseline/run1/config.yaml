@@ -1,0 +1,15 @@
+chunk_overlap: 64
+chunk_size: 512
+embedding_dimension: null
+embedding_model: text-embedding-3-small
+llm_model: gpt-4o-mini
+paths:
+  dataset: data/dataset
+  experiments: experiments
+  indexes: data/indexes
+  processed: data/processed
+  raw: data/raw
+  results: results
+temperature: 0
+top_k: 5
+use_retrieval: true

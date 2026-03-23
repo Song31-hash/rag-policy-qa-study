@@ -1,0 +1,12 @@
+{
+  "q1": {
+    "answer": "휴가 신청은 사용일 2주 전까지 제출해야 합니다.",
+    "correct_rule_chunk_id": 0,
+    "error_type": null
+  },
+  "q2": {
+    "answer": "주당 최대 2일까지 원격 근무가 가능합니다.",
+    "correct_rule_chunk_id": 1,
+    "error_type": null
+  }
+}
