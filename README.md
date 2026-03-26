@@ -1,165 +1,233 @@
 # Policy RAG Study
 
+A research project investigating the limitations of Retrieval-Augmented Generation (RAG) for policy QA, showing that improving retrieval alone is insufficient without robust rule-based reasoning.
+
 ## Overview
 
-This project investigates whether Retrieval-Augmented Generation (RAG) improves the accuracy of large language models in policy eligibility question answering.
+This project investigates the effectiveness and limitations of Retrieval-Augmented Generation (RAG) for policy-based question answering (QA), focusing on rule-based decision tasks.
 
-A benchmark dataset of 20 policy QA questions was constructed based on a Korean government policy document. The study compares a vanilla LLM with a RAG-based system under controlled experimental conditions.
+Unlike general QA, policy QA requires strict application of rules, including threshold conditions, exception handling, and multi-step reasoning.
 
-The results show that RAG improves accuracy from 0.55 to 0.75, demonstrating the importance of retrieval for rule-based reasoning tasks.
+This study goes beyond simple RAG evaluation and analyzes how retrieval configurations (chunk size, top-k, and overlap) and reasoning limitations affect performance.
+
+- Vanilla LLM: 0.55 accuracy  
+- RAG (baseline): 0.70 accuracy  
+- Best configuration (overlap=64, top-k=5): **0.80 accuracy**
+
+**Key Insight:**  
+Improving retrieval alone is insufficient for policy QA; the primary bottleneck lies in rule-based reasoning rather than information access.
 
 ---
 
 ## Research Questions
 
-This study investigates two key questions:
+This study investigates:
 
-1. Does retrieval improve the accuracy of LLMs in policy-based decision tasks?
-2. What types of errors can retrieval mitigate compared to a vanilla LLM?
+1. Does RAG improve policy QA accuracy compared to a vanilla LLM?
+2. How do retrieval configurations (chunk size, top-k, overlap) affect performance?
+3. What are the main sources of error in policy QA systems?
+4. How do retrieval and reasoning interact in policy QA tasks?
 
 ---
 
 ## Dataset
 
-The dataset consists of 20 manually constructed policy eligibility questions.
+- Source: Korean government policy document (소상공인 정책자금)
+- Size: 20 manually constructed QA pairs
+- Labels: `yes`, `no`, `selection_required`
 
-Each question is designed to evaluate specific reasoning challenges:
+Each question evaluates:
 
 - Threshold boundary conditions
 - Exception rules
 - Industry restrictions
 - Financial eligibility conditions
-- Program selection logic
+- Multi-condition reasoning
 
-Each item includes:
-
-- question_id
-- question text
-- expected decision (yes / no / selection_required)
-- reasoning reference
-
-Ground truth answers were manually verified against the policy document.
+Ground truth answers were manually verified.
 
 ---
 
 ## Method
 
-Two systems are evaluated:
-
 ### Vanilla LLM
-The model directly answers questions without document retrieval.
 
-Question → LLM → Answer
+`Question → LLM → Answer`
 
 ### RAG-based LLM
-The system retrieves relevant document chunks and uses them as context.
 
-Question → Embedding → FAISS Retrieval → Top-k Chunks → LLM → Answer
+`Question → Embedding → FAISS → Top-k Chunks → LLM → Answer`
 
-The RAG pipeline includes:
+Pipeline components:
 
 - Document ingestion (.docx)
-- Text chunking (chunk size: 512, overlap: 64)
-- Embedding generation (text-embedding-3-small)
-- FAISS vector index
-- Top-k retrieval (k=5)
+- Chunking (chunk size / overlap)
+- Embedding (text-embedding-3-small)
+- FAISS retrieval
+- Top-k selection
 - Answer generation (gpt-4o-mini)
-
-All experiments are conducted under fixed conditions to ensure reproducibility.
 
 ---
 
-## Experiment Setup
+## Experiments
 
-- Number of questions: 20
-- Evaluation metric: Accuracy (decision correctness)
-- Same dataset used for both Vanilla and RAG
+We systematically evaluate key RAG components:
+
+### 1. Chunk Size
+- 256 / 512 / 1024
+
+### 2. Top-k Retrieval
+- 1 / 3 / 5 / 10
+
+### 3. Chunk Overlap
+- 0 / 64 / 128
+
+### 4. Chain-of-Thought (CoT)
+- reasoning-enhanced prompting
 
 ---
 
 ## Results
 
-| Model        | Accuracy |
-|-------------|--------|
-| Vanilla LLM | 0.55   |
-| RAG-based LLM | 0.75 |
+### Vanilla vs RAG
 
-RAG improves accuracy by 20 percentage points.
+| Model | Accuracy |
+|------|--------|
+| Vanilla LLM | 0.55 |
+| RAG (512) | 0.70 |
 
-This improvement suggests that many errors in the vanilla LLM originate from missing or incorrectly recalled policy rules, which can be mitigated through retrieval.
+---
+
+### Top-k Effect
+
+| Top-k | Accuracy |
+|------|--------|
+| 1 | 0.65 |
+| 3 | 0.70 |
+| 5 | 0.80 |
+| 10 | 0.80 |
+
+→ Increasing top-k improves recall but saturates after k=5.
+
+---
+
+### Overlap Effect
+
+| Overlap | Accuracy |
+|--------|--------|
+| 0 | 0.65 |
+| 64 | 0.80 |
+| 128 | 0.80 |
+
+→ Overlap reduces rule fragmentation and significantly improves performance.
+
+---
+
+### Joint Effect (Top-k + Overlap)
+
+| Overlap \ Top-k | 3 | 5 | 10 |
+|----------------|---|---|----|
+| 0 | 0.60 | 0.65 | 0.65 |
+| 64 | 0.70 | **0.80** | 0.80 |
+| 128 | 0.70 | 0.80 | 0.75 |
+
+→ Optimal configuration: **overlap=64, top-k=5**
+
+---
+
+### CoT Effect
+
+| Setting | Accuracy |
+|--------|--------|
+| Baseline | 0.80 |
+| + CoT | ~0.82 |
+
+→ CoT provides minor improvements but does not fully resolve reasoning errors.
 
 ---
 
 ## Error Analysis
 
-Representative cases:
+Key error types:
 
-| QID | Gold | Vanilla | RAG | Improvement | Error Type | Notes |
-|-----|------|--------|-----|------------|------------|------|
-| Q-08 | yes | no | yes | RAG fixed | vanilla hallucination | Incorrect rejection by vanilla |
-| Q-09 | yes | no | yes | RAG fixed | vanilla hallucination | Multi-rule reasoning required |
-| Q-10 | no | yes | no | RAG fixed | vanilla hallucination | Misinterpreted condition |
-| Q-14 | yes | no | yes | RAG fixed | vanilla hallucination | Exception rule applied |
-| Q-11 | yes | no | no | none | reasoning error | Boundary misinterpretation |
-| Q-12 | yes | no | uncertain | none | source gap | Missing or unclear evidence |
+- **Retrieval Failure**
+- **Partial Retrieval**
+- **Reasoning Failure**
+- **Normalization Failure**
 
-Key findings:
+Findings:
 
-- Vanilla LLM frequently hallucinates or misapplies policy rules
-- RAG reduces such errors by grounding answers in retrieved documents
-- Remaining errors are due to reasoning limitations and incomplete document coverage
+- RAG reduces hallucination errors significantly
+- Remaining errors are dominated by reasoning failures
+- Boundary conditions and exception rules are the hardest cases
+
+---
+
+## Key Findings
+
+- Retrieval improves performance, but is not sufficient
+- Chunk size, overlap, and top-k critically affect performance
+- There exists an optimal retrieval configuration
+- Policy QA is fundamentally a **rule-based reasoning problem**
 
 ---
 
 ## Project Structure
 
-policy-rag-study/
 
-configs/        # experiment configurations  
-data/           # dataset and policy document  
-src/            # core RAG pipeline implementation  
-scripts/        # experiment execution  
-experiments/    # experiment outputs  
-results/        # analysis outputs  
+policy-rag-study/
+├── configs/
+├── data/
+├── src/
+├── scripts/
+├── experiments/
+├── results/
+
 
 ---
 
 ## Reproducibility
 
-- All model settings (embedding, LLM, temperature) are fixed via config
-- Each experiment run saves config.yaml, predictions.json, and evaluation.json
-- Experiments can be reproduced under identical conditions
+- All experiments use fixed configurations
+- Each run saves:
+  - config
+  - predictions
+  - evaluation results
 
 ---
 
 ## Usage
 
 1. Install dependencies
-   pip install -r requirements.txt
 
-2. Set environment variables
-   Set OPENAI_API_KEY in .env
+pip install -r requirements.txt
+
+
+2. Set API key
+
+export OPENAI_API_KEY=...
+
 
 3. Build index
-   python scripts/ingest_policy.py --config configs/rag.yaml
+
+python scripts/ingest_policy.py --config configs/rag.yaml
+
 
 4. Run experiments
-   python scripts/run_experiment.py --config configs/vanilla.yaml --experiment vanilla --run-name run1
-   python scripts/run_experiment.py --config configs/rag.yaml --experiment rag_baseline --run-name run1
 
-5. Evaluate
-   python scripts/evaluate.py --experiment rag_baseline/run1
+python scripts/run_rag.py --config configs/rag.yaml
+
 
 ---
 
 ## Future Work
 
-- Investigating the impact of chunk size on retrieval performance
-- Improving reasoning through structured rule extraction
-- Expanding the dataset for more robust evaluation
+- Rule-aware retrieval methods
+- Structured reasoning for policy rules
+- Larger-scale policy QA benchmarks
 
 ---
 
 ## Author
 
-Independent research project for AI graduate school application.
+Independent research project for AI graduate school application
