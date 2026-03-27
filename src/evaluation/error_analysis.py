@@ -1,49 +1,228 @@
-"""에러 분석: retrieval_failure, reasoning_failure, hallucination 등 수동/자동 분류."""
+"""Error analysis utilities for policy QA evaluation."""
+
+from __future__ import annotations
+
+import re
+from collections import Counter
 from typing import Any
 
-from .answer_eval import exact_match
-from .retrieval_eval import check_chunks_contain_rule
+ALLOWED_DECISIONS = {"yes", "no", "selection_required"}
 
-
-# 수동 라벨용 에러 타입 (논문 분석)
-ERROR_TYPES = [
-    "retrieval_failure",   # 정답 청크 미검색
-    "reasoning_failure",   # 검색됐으나 잘못 추론
-    "hallucination",      # 컨텍스트에 없는 내용 생성
-    "no_answer",           # 답 없음/회피
-    "other",
+# 정책 QA에서 자주 등장하는 핵심 규칙 cue
+DOMAIN_CUES = [
+    "10명 미만",
+    "5명 미만",
+    "30일 이상",
+    "10일 이상",
+    "4회",
+    "1회",
+    "최근 3개월",
+    "징수유예",
+    "체납처분유예",
+    "징수특례",
+    "시설자금",
+    "공유오피스",
+    "공유주방",
+    "부동산업",
+    "약국",
+    "특별재난지역",
+    "비영리",
+    "외국법인",
+    "지점",
+    "조합",
+    "부채비율",
+    "700%",
+    "업력 7년 이하",
+    "상생형",
+    "tops형",
+    "tops 프로그램",
+    "2단계",
+    "플랫폼 판매촉진",
+    "온라인 플랫폼",
+    "운수업",
+    "건설업",
+    "제조업",
+    "음식점",
 ]
 
 
+def _safe_str(x: Any) -> str:
+    if x is None:
+        return ""
+    return str(x)
+
+
+def _normalize_text(text: str) -> str:
+    """
+    rule matching용 느슨한 정규화.
+    - 소문자화
+    - 공백 축소
+    - 일부 구두점 제거
+    """
+    text = _safe_str(text).lower()
+    text = text.replace("\n", " ")
+    text = re.sub(r"[\"'“”‘’\(\)\[\]\{\},:;]", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def _join_retrieved_texts(retrieved_chunks: list[dict]) -> str:
+    return "\n".join(_safe_str(c.get("text", "")) for c in (retrieved_chunks or []))
+
+
+def _extract_domain_cues(text: str) -> list[str]:
+    """
+    gold reasoning / question에서 정책 판단에 중요한 cue를 추출.
+    """
+    norm = _normalize_text(text)
+    found = []
+
+    for cue in DOMAIN_CUES:
+        if _normalize_text(cue) in norm:
+            found.append(cue)
+
+    # 숫자 + 단위 패턴 추가 추출
+    numeric_patterns = [
+        r"\d+\s*명\s*미만",
+        r"\d+\s*일\s*이상",
+        r"\d+\s*회",
+        r"\d+\s*%",
+        r"\d+\s*단계",
+        r"\d+\s*년",
+    ]
+    for pattern in numeric_patterns:
+        for match in re.findall(pattern, norm):
+            found.append(match)
+
+    # 순서 보존 + 중복 제거
+    dedup = []
+    seen = set()
+    for x in found:
+        key = _normalize_text(x)
+        if key and key not in seen:
+            dedup.append(x)
+            seen.add(key)
+
+    return dedup
+
+
+def infer_retrieval_status(
+    retrieved_chunks: list[dict],
+    gold: dict,
+) -> str:
+    """
+    retrieval 상태를 success / partial / failure / unknown 으로 판정.
+    기준:
+    - gold reasoning_point/question에서 핵심 cue 추출
+    - retrieved text에 얼마나 포함되는지 확인
+    """
+    retrieved_text = _normalize_text(_join_retrieved_texts(retrieved_chunks))
+    reasoning = _safe_str(gold.get("reasoning_point", ""))
+    question = _safe_str(gold.get("question", ""))
+    gold_answer = _safe_str(gold.get("answer", gold.get("expected_decision", "")))
+
+    cue_source = " ".join([reasoning, question, gold_answer])
+    cues = _extract_domain_cues(cue_source)
+
+    if not cues:
+        return "unknown"
+
+    matched = []
+    for cue in cues:
+        if _normalize_text(cue) in retrieved_text:
+            matched.append(cue)
+
+    n_total = len(cues)
+    n_matched = len(matched)
+
+    # 매우 단순한 휴리스틱:
+    # - 핵심 cue가 충분히 많이 보이면 success
+    # - 일부만 보이면 partial
+    # - 거의 없으면 failure
+    if n_total <= 2:
+        if n_matched >= 1:
+            return "success"
+        return "failure"
+
+    ratio = n_matched / n_total
+
+    if n_matched >= 2 and ratio >= 0.5:
+        return "success"
+    if n_matched >= 1:
+        return "partial"
+    return "failure"
+
+
+def _is_unclassified_decision(normalized_answer: str) -> bool:
+    """
+    yes / no / selection_required 중 하나로 정규화되지 않은 경우.
+    """
+    return _safe_str(normalized_answer) not in ALLOWED_DECISIONS
+
+
 def classify_error_type(
-    model_answer: str,
+    normalized_answer: str,
     gold_answer: str,
     retrieved_chunks: list[dict],
     gold: dict,
-    manual_label: str | None = None,
+    error_type_manual: str | None = None,
 ) -> str | None:
     """
-    manual_label 이 있으면 사용.
-    없으면 휴리스틱: correct_rule 미검색 -> retrieval_failure,
-    검색됐는데 틀림 -> reasoning_failure 등.
+    오류 유형 분류.
+    반환값:
+    - retrieval_failure
+    - partial_retrieval
+    - reasoning_failure
+    - normalization_failure
+    - other
+    - None (정답이면)
     """
-    if manual_label and manual_label in ERROR_TYPES:
-        return manual_label
-    if exact_match(model_answer, gold_answer):
-        return None  # 정답
-    correct_id = gold.get("correct_rule_chunk_id")
-    has_rule = check_chunks_contain_rule(retrieved_chunks, correct_id)
-    if not has_rule:
+    # 외부에서 명시적으로 준 manual label이 있으면 우선 사용
+    if error_type_manual is not None:
+        manual = _safe_str(error_type_manual).strip()
+        if manual and manual.lower() != "nan":
+            return manual
+
+    normalized_answer = _safe_str(normalized_answer)
+    gold_answer = _safe_str(gold_answer)
+
+    # 정답이면 에러 없음
+    if normalized_answer == gold_answer:
+        return None
+
+    retrieval_status = infer_retrieval_status(retrieved_chunks, gold)
+
+    # 1) retrieval 자체 실패
+    if retrieval_status == "failure":
         return "retrieval_failure"
-    if not (model_answer or "").strip():
-        return "no_answer"
-    return "reasoning_failure"  # 기본 추정
+
+    # 2) 일부만 가져온 경우
+    if retrieval_status == "partial":
+        return "partial_retrieval"
+
+    # 3) retrieval은 성공했는데 decision enum으로 못 떨어짐
+    if retrieval_status == "success" and _is_unclassified_decision(normalized_answer):
+        return "normalization_failure"
+
+    # 4) retrieval은 성공했는데 정답 판단을 잘못함
+    if retrieval_status == "success" and normalized_answer in ALLOWED_DECISIONS and normalized_answer != gold_answer:
+        return "reasoning_failure"
+
+    return "other"
 
 
-def aggregate_error_types(per_item_results: list[dict]) -> dict[str, int]:
-    """per_item 의 error_type 집계."""
-    counts: dict[str, int] = {}
-    for r in per_item_results:
-        et = r.get("error_type") or "other"
-        counts[et] = counts.get(et, 0) + 1
-    return counts
+def aggregate_error_types(per_item: list[dict[str, Any]]) -> dict[str, int]:
+    """
+    per_item 평가 결과에서 error_type 빈도 집계.
+    None은 other로 세지 않고 제외.
+    """
+    counter = Counter()
+
+    for item in per_item:
+        err = item.get("error_type", None)
+        if err is None:
+            counter["other"] += 1
+        else:
+            counter[_safe_str(err)] += 1
+
+    return dict(counter)

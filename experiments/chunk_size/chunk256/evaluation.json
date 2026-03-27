@@ -2,7 +2,7 @@
   "per_item": [
     {
       "question_id": "Q-01",
-      "model_answer": "아니요, 상시 근로자가 10명인 경우 지원 대상에 해당하지 않습니다. 제조업의 경우 상시 근로자 수 기준이 10명 미만이어야 하므로, 10명인 개인사업자는 지원이 불가능합니다.",
+      "model_answer": "아니요, 상시 근로자가 10명인 경우 제조업에 해당하지만, 지원 대상은 상시 근로자 수가 10명 미만이어야 하므로 신청할 수 없습니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -14,19 +14,19 @@
     },
     {
       "question_id": "Q-02",
-      "model_answer": "제공된 정보에 따르면, 음식점은 소상공인으로 분류될 수 있지만, 상시 근로자 수 기준이 업종별로 다르므로 음식점의 경우 해당 기준이 명시되어 있지 않습니다. 따라서 음식점이 6명의 직원을 두고 있다면, 업종별 기준에 따라 신청 가능 여부를 확인해야 합니다. 추가적인 정보가 필요합니다.",
-      "normalized_answer": "yes",
+      "model_answer": "제공된 정보에 따르면, 음식점은 소상공인 기준에 해당하는 업종으로 보입니다. 그러나 상시 근로자 수 기준이 업종별로 다르므로, 음식점의 경우 상시 근로자 수 기준이 명시되어 있지 않아 정확한 판단이 어렵습니다. 일반적으로 음식점이 소상공인으로 인정받기 위해서는 상시 근로자 수가 업종별 기준에 부합해야 합니다. 추가적인 정보가 필요합니다.",
+      "normalized_answer": "제공된 정보에 따르면, 음식점은 소상공인 기준에 해당하는 업종으로 보입니다. 그러나 상시 근로자 수 기준이 업종별로 다르므로, 음식점의 경우 상시 근로자 수 기준이 명시되어 있지 않아 정확한 판단이 어렵습니다. 일반적으로 음식점이 소상공인으로 인정받기 위해서는 상시 근로자 수가 업종별 기준에 부합해야 합니다. 추가적인 정보가 필요합니다.",
       "gold_answer": "no",
       "accuracy": false,
       "exact_match": false,
       "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
       "num_retrieved": 5,
-      "error_type": "retrieval_failure"
+      "error_type": "normalization_failure"
     },
     {
       "question_id": "Q-03",
-      "model_answer": "지원 대상이 되지 않습니다. 비영리기업은 소상공인 정책자금 지원대상에서 제외되기 때문입니다.",
+      "model_answer": "지원 대상이 되지 않습니다. 비영리기업은 소상공인정책자금 지원대상에서 제외되기 때문입니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -38,7 +38,7 @@
     },
     {
       "question_id": "Q-04",
-      "model_answer": "제공된 정보에 따르면, 일반 유흥주점은 소상공인 정책자금의 지원 제외 업종에 해당할 가능성이 높습니다. 따라서 상생성장지원자금 신청이 불가능할 것으로 보입니다.",
+      "model_answer": "제공된 정보에 따르면, 일반 유흥주점은 지원 제외 대상 업종에 해당할 가능성이 높습니다. 따라서 상생성장지원자금 신청이 불가능할 것으로 보입니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -106,19 +106,19 @@
       "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
       "num_retrieved": 5,
-      "error_type": "retrieval_failure"
+      "error_type": "partial_retrieval"
     },
     {
       "question_id": "Q-10",
-      "model_answer": "2개월 전 카드 대금 연체가 5일간 있었으나 지금은 모두 갚았다면, 신용 정보상 결격 사유가 아닙니다. 연체가 10일 이상 지속되거나 30일 이상 연체가 1회 이상 발생해야 결격 사유가 됩니다.",
-      "normalized_answer": "2개월 전 카드 대금 연체가 5일간 있었으나 지금은 모두 갚았다면, 신용 정보상 결격 사유가 아닙니다. 연체가 10일 이상 지속되거나 30일 이상 연체가 1회 이상 발생해야 결격 사유가 됩니다.",
+      "model_answer": "제공된 정보에 따르면, 최근 3개월 이내에 10일 이상 연체가 4회 이상 발생한 경우에 해당하지 않으므로, 2개월 전 카드 대금 연체가 5일간 있었더라도 현재 모두 갚았다면 신용 정보상 결격 사유가 아닙니다.",
+      "normalized_answer": "제공된 정보에 따르면, 최근 3개월 이내에 10일 이상 연체가 4회 이상 발생한 경우에 해당하지 않으므로, 2개월 전 카드 대금 연체가 5일간 있었더라도 현재 모두 갚았다면 신용 정보상 결격 사유가 아닙니다.",
       "gold_answer": "no",
       "accuracy": false,
       "exact_match": false,
       "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
       "num_retrieved": 5,
-      "error_type": "retrieval_failure"
+      "error_type": "normalization_failure"
     },
     {
       "question_id": "Q-11",
@@ -134,8 +134,8 @@
     },
     {
       "question_id": "Q-12",
-      "model_answer": "제공된 맥락에는 부동산업에 대한 구체적인 지원 대상 여부가 명시되어 있지 않으므로, 지원 대상 업종에 해당하는지 여부를 판단할 수 없습니다.",
-      "normalized_answer": "제공된 맥락에는 부동산업에 대한 구체적인 지원 대상 여부가 명시되어 있지 않으므로, 지원 대상 업종에 해당하는지 여부를 판단할 수 없습니다.",
+      "model_answer": "제공된 맥락에 따르면, 부동산업은 지원 대상 업종에 포함되지 않습니다. 따라서 공유오피스를 운영하고 있다면 지원 대상이 아닙니다.",
+      "normalized_answer": "no",
       "gold_answer": "yes",
       "accuracy": false,
       "exact_match": false,
@@ -158,7 +158,7 @@
     },
     {
       "question_id": "Q-14",
-      "model_answer": "제공된 맥락에는 특별재난지역에 소재한 약국에 대한 지원 가능성에 대한 정보가 포함되어 있지 않습니다. 따라서, 이 질문에 대한 답변은 없습니다.",
+      "model_answer": "제공된 맥락에서는 특별재난지역에 소재한 약국에 대한 지원 가능성에 대한 정보가 없습니다. 따라서, 지원이 가능한지 여부에 대한 답변을 드릴 수 없습니다.",
       "normalized_answer": "yes",
       "gold_answer": "yes",
       "accuracy": true,
@@ -190,7 +190,7 @@
       "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
       "num_retrieved": 5,
-      "error_type": "retrieval_failure"
+      "error_type": "normalization_failure"
     },
     {
       "question_id": "Q-17",
@@ -202,7 +202,7 @@
       "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
       "num_retrieved": 5,
-      "error_type": "retrieval_failure"
+      "error_type": "reasoning_failure"
     },
     {
       "question_id": "Q-18",
@@ -218,7 +218,7 @@
     },
     {
       "question_id": "Q-19",
-      "model_answer": "네, '시설자금'의 경우 소상공인 정책자금을 3회 이상 지원받은 기업이라도 1회에 한해 추가 지원이 가능합니다.",
+      "model_answer": "네, 시설자금의 경우 소상공인 정책자금을 3회 이상 지원받은 기업이라도 1회에 한해 추가 지원이 가능합니다.",
       "normalized_answer": "yes",
       "gold_answer": "yes",
       "accuracy": true,
@@ -238,7 +238,7 @@
       "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
       "num_retrieved": 5,
-      "error_type": "retrieval_failure"
+      "error_type": "reasoning_failure"
     }
   ],
   "accuracy": 0.65,
@@ -246,7 +246,10 @@
   "num_questions": 20,
   "error_type_counts": {
     "other": 13,
-    "retrieval_failure": 7
+    "normalization_failure": 3,
+    "partial_retrieval": 1,
+    "retrieval_failure": 1,
+    "reasoning_failure": 2
   },
   "config": {
     "chunking": {
@@ -276,5 +279,5 @@
       "output_dir": "C:\\aiproject\\policy-rag-study\\experiments\\chunk_size\\chunk256"
     }
   },
-  "timestamp": "2026-03-19T10:28:04.432906Z"
+  "timestamp": "2026-03-23T08:47:53.279404Z"
 }

@@ -2,7 +2,7 @@
   "per_item": [
     {
       "question_id": "Q-01",
-      "model_answer": "신청할 수 없습니다. 제조업의 경우 상시 근로자 수가 10명 미만이어야 하므로, 10명이면 지원 대상에서 제외됩니다.",
+      "model_answer": "아니요, 제조업의 경우 상시 근로자 수 기준이 10명 미만이므로, 10명의 상시 근로자를 둔 개인사업자는 지원 대상이 아닙니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -14,19 +14,19 @@
     },
     {
       "question_id": "Q-02",
-      "model_answer": "제공된 정보에 따르면, 음식점은 소상공인으로 분류될 수 있지만, 상시 근로자 수 기준이 업종별로 다르므로 음식점의 경우 해당 기준이 명시되어 있지 않습니다. 따라서, 음식점이 소상공인 기준에 부합하는지 여부는 추가적인 정보가 필요합니다.",
-      "normalized_answer": "제공된 정보에 따르면, 음식점은 소상공인으로 분류될 수 있지만, 상시 근로자 수 기준이 업종별로 다르므로 음식점의 경우 해당 기준이 명시되어 있지 않습니다. 따라서, 음식점이 소상공인 기준에 부합하는지 여부는 추가적인 정보가 필요합니다.",
+      "model_answer": "아니요, 직원 6명을 둔 음식점은 소상공인 기준에 부합하지 않습니다. 음식점은 상시 근로자 수 기준이 5명 미만이어야 하므로, 6명은 초과합니다.",
+      "normalized_answer": "no",
       "gold_answer": "no",
-      "accuracy": false,
-      "exact_match": false,
-      "token_f1": 0.0,
+      "accuracy": true,
+      "exact_match": true,
+      "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
       "num_retrieved": 5,
-      "error_type": "normalization_failure"
+      "error_type": null
     },
     {
       "question_id": "Q-03",
-      "model_answer": "지원 대상이 되지 않습니다. 비영리기업은 소상공인정책자금 지원대상에서 제외되기 때문입니다.",
+      "model_answer": "비영리 사회적 협동조합은 지원 대상에서 제외됩니다. 영리 목적의 사업을 영위하는 기업만 지원 대상이 됩니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -50,7 +50,7 @@
     },
     {
       "question_id": "Q-05",
-      "model_answer": "온라인 판매를 하지 않고 오프라인 매장만 운영 중인 소상공인은 상생성장지원자금 신청이 불가능합니다. 지원대상은 온라인 플랫폼에 입점한 소상공인에 한정되기 때문입니다.",
+      "model_answer": "온라인 판매를 하지 않고 오프라인 매장만 운영 중인 소상공인은 상생성장지원자금 신청이 불가능합니다. 지원대상은 온라인 플랫폼에 입점한 소상공인으로 한정되어 있습니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -62,7 +62,7 @@
     },
     {
       "question_id": "Q-06",
-      "model_answer": "예, 지방세가 일부 체납되어 있으나 현재 징수유예 결정을 받은 상태라면 대출신청이 가능합니다.",
+      "model_answer": "네, 지방세가 일부 체납되어 있으나 현재 징수유예 결정을 받은 상태라면 대출신청이 가능합니다.",
       "normalized_answer": "yes",
       "gold_answer": "yes",
       "accuracy": true,
@@ -98,7 +98,7 @@
     },
     {
       "question_id": "Q-09",
-      "model_answer": "운수업의 상시 근로자 수 기준은 10명 미만이므로, 직원 8명을 둔 운수업 사업자는 이 기준을 충족합니다. 그러나 부업으로 공유오피스 임대업을 병행하는 경우, 주된 사업이 운수업이므로 자격이 됩니다. 따라서 자격이 있습니다.",
+      "model_answer": "운수업의 상시 근로자 수 기준은 10명 미만이므로, 직원 8명을 둔 운수업 사업자는 이 기준에 부합합니다. 그러나 부업으로 공유오피스 임대업을 병행하고 있는 경우, 주된 사업이 운수업이므로 자격이 됩니다. 따라서 자격이 있습니다.",
       "normalized_answer": "yes",
       "gold_answer": "yes",
       "accuracy": true,
@@ -110,7 +110,7 @@
     },
     {
       "question_id": "Q-10",
-      "model_answer": "2개월 전 카드 대금 연체가 5일간 있었으나 현재 모두 갚았다면, 신용 정보상 결격 사유가 될 가능성이 낮습니다. 그러나 연체가 30일 이상 지속되거나 10일 이상 연체가 4회 이상 발생한 경우에는 결격 사유가 될 수 있습니다. 따라서, 5일간의 연체는 결격 사유에 해당하지 않습니다.",
+      "model_answer": "2개월 전 카드 대금 연체가 5일간 있었으나 지금은 모두 갚았다면, 신용 정보상 결격 사유에 해당하지 않습니다. 연체가 30일 이상 지속되지 않았기 때문입니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -122,15 +122,15 @@
     },
     {
       "question_id": "Q-11",
-      "model_answer": "네, 직원이 9명인 건설업체 개인사업자는 상시 근로자 수 기준을 충족하여 신청이 가능합니다. 건설업의 경우 10명 미만이므로 해당 기준에 부합합니다.",
-      "normalized_answer": "yes",
+      "model_answer": "아니요, 건설업체의 경우 상시 근로자 수 기준은 10인 미만이어야 하므로, 직원이 9명인 경우 기준을 충족하지 않습니다.",
+      "normalized_answer": "no",
       "gold_answer": "yes",
-      "accuracy": true,
-      "exact_match": true,
-      "token_f1": 1.0,
+      "accuracy": false,
+      "exact_match": false,
+      "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
       "num_retrieved": 5,
-      "error_type": null
+      "error_type": "reasoning_failure"
     },
     {
       "question_id": "Q-12",
@@ -158,15 +158,15 @@
     },
     {
       "question_id": "Q-14",
-      "model_answer": "제공된 맥락에서는 특별재난지역에 소재한 약국에 대한 지원 가능성에 대한 정보가 없습니다. 따라서, 해당 약국이 제외 업종이지만 예외적으로 지원이 가능한지에 대한 답변은 없습니다.",
-      "normalized_answer": "no",
+      "model_answer": "제공된 맥락에서는 특별재난지역에 소재한 약국에 대한 지원 가능성에 대한 정보가 없습니다. 따라서, 이 질문에 대한 답변은 없습니다.",
+      "normalized_answer": "yes",
       "gold_answer": "yes",
-      "accuracy": false,
-      "exact_match": false,
-      "token_f1": 0.0,
+      "accuracy": true,
+      "exact_match": true,
+      "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
       "num_retrieved": 5,
-      "error_type": "retrieval_failure"
+      "error_type": null
     },
     {
       "question_id": "Q-15",
@@ -182,8 +182,8 @@
     },
     {
       "question_id": "Q-16",
-      "model_answer": "네, 최근 3개월 내에 15일간 연체가 1회 발생한 경우, 신청이 제한됩니다. 30일 이상 연체가 1회 이상 발생한 경우에 해당하기 때문입니다.",
-      "normalized_answer": "네, 최근 3개월 내에 15일간 연체가 1회 발생한 경우, 신청이 제한됩니다. 30일 이상 연체가 1회 이상 발생한 경우에 해당하기 때문입니다.",
+      "model_answer": "최근 3개월 내에 15일간 연체가 1회 발생한 경우, 연체 기준에 해당하지 않으므로 신청이 제한되지 않습니다. 연체가 30일 이상이거나 10일 이상 연체가 4회 이상 발생해야 신청이 제한됩니다.",
+      "normalized_answer": "최근 3개월 내에 15일간 연체가 1회 발생한 경우, 연체 기준에 해당하지 않으므로 신청이 제한되지 않습니다. 연체가 30일 이상이거나 10일 이상 연체가 4회 이상 발생해야 신청이 제한됩니다.",
       "gold_answer": "no",
       "accuracy": false,
       "exact_match": false,
@@ -194,19 +194,19 @@
     },
     {
       "question_id": "Q-17",
-      "model_answer": "부채비율이 800%이지만 업력 7년 이하 업체에 대해서는 적용되지 않으므로, 신청 자격이 있습니다.",
-      "normalized_answer": "yes",
+      "model_answer": "부채비율이 800%이지만 사업을 시작한 지 5년이므로, 지원 가능성에 대한 예외사항에 해당하지 않습니다. 따라서 신청 자격이 없습니다.",
+      "normalized_answer": "no",
       "gold_answer": "yes",
-      "accuracy": true,
-      "exact_match": true,
-      "token_f1": 1.0,
+      "accuracy": false,
+      "exact_match": false,
+      "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
       "num_retrieved": 5,
-      "error_type": null
+      "error_type": "reasoning_failure"
     },
     {
       "question_id": "Q-18",
-      "model_answer": "아니요, 비영리 사업자는 지원 대상에서 제외됩니다.",
+      "model_answer": "법인격이 없는 친목 조합 형태의 사업자는 지원 대상이 아닙니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -246,44 +246,32 @@
   "num_questions": 20,
   "error_type_counts": {
     "other": 15,
-    "normalization_failure": 2,
-    "retrieval_failure": 2,
-    "reasoning_failure": 1
+    "reasoning_failure": 3,
+    "retrieval_failure": 1,
+    "normalization_failure": 1
   },
   "config": {
-    "embedding": {
-      "model": "text-embedding-3-small",
-      "dimension": 1536
-    },
-    "retrieval": {
-      "top_k": 5
-    },
-    "generation": {
-      "model": "gpt-4o-mini",
-      "temperature": 0
-    },
+    "embedding_model": "text-embedding-3-small",
+    "embedding_dimension": null,
+    "llm_model": "gpt-4o-mini",
+    "temperature": 0,
     "paths": {
       "raw": "C:\\aiproject\\policy-rag-study\\data\\raw",
-      "processed": "C:\\aiproject\\policy-rag-study\\data\\processed",
+      "processed": "C:\\aiproject\\policy-rag-study\\data\\processed_overlap_64",
       "dataset": "C:\\aiproject\\policy-rag-study\\data\\dataset",
+      "indexes": "C:\\aiproject\\policy-rag-study\\data\\indexes_overlap_64",
+      "experiments": "C:\\aiproject\\policy-rag-study\\experiments",
+      "results": "C:\\aiproject\\policy-rag-study\\results",
+      "output_dir": "C:\\aiproject\\policy-rag-study\\experiments\\overlap_64_topk_5",
+      "chunks_path": "C:\\aiproject\\policy-rag-study\\data\\processed_overlap_64\\chunks.json",
+      "index_dir": "C:\\aiproject\\policy-rag-study\\data\\indexes_overlap_64",
       "questions_path": "C:\\aiproject\\policy-rag-study\\data\\dataset\\questions.json",
-      "gold_path": "C:\\aiproject\\policy-rag-study\\data\\dataset\\gold_answers.json",
-      "output_dir": "C:\\aiproject\\policy-rag-study\\experiments\\adaptive\\chunk_router"
+      "gold_path": "C:\\aiproject\\policy-rag-study\\data\\dataset\\gold_answers.json"
     },
-    "adaptive_paths": {
-      "256": {
-        "chunks_path": "data/processed/chunks_chunk256.json",
-        "index_dir": "data/indexes/chunk256"
-      },
-      "512": {
-        "chunks_path": "data/processed/chunks_chunk512.json",
-        "index_dir": "data/indexes/chunk512"
-      },
-      "1024": {
-        "chunks_path": "data/processed/chunks_chunk1024.json",
-        "index_dir": "data/indexes/chunk1024"
-      }
-    }
+    "chunk_size": 512,
+    "chunk_overlap": 64,
+    "top_k": 5,
+    "use_retrieval": true
   },
-  "timestamp": "2026-03-23T08:52:12.178590Z"
+  "timestamp": "2026-03-26T06:52:33.119986Z"
 }

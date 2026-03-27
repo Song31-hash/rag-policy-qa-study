@@ -2,7 +2,7 @@
   "per_item": [
     {
       "question_id": "Q-01",
-      "model_answer": "아니요, 제조업의 경우 상시 근로자 수 기준이 10명 미만이므로, 상시 근로자가 10명인 개인사업자는 지원 대상이 아닙니다.",
+      "model_answer": "신청할 수 없습니다. 제조업의 경우 상시 근로자 수 기준이 10명 미만이어야 하므로, 10명이면 지원 대상에서 제외됩니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -14,7 +14,7 @@
     },
     {
       "question_id": "Q-02",
-      "model_answer": "아니요, 직원 6명을 둔 음식점은 소상공인 기준에 부합하지 않습니다. 음식점은 상시 근로자 수 기준이 5명 미만이어야 하므로, 6명은 초과합니다.",
+      "model_answer": "아니요, 음식점은 소상공인 기준에 따라 상시 근로자 수가 5인 미만이어야 하므로, 직원 6명을 둔 음식점은 신청이 불가능합니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -26,7 +26,7 @@
     },
     {
       "question_id": "Q-03",
-      "model_answer": "비영리 기업은 소상공인 정책자금 지원 대상에서 제외되므로, 지역 소상공인들이 모여 만든 비영리 사회적 협동조합은 지원 대상이 되지 않습니다.",
+      "model_answer": "지원 대상이 아닙니다. 비영리사업자는 지원에서 제외되기 때문입니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -38,7 +38,7 @@
     },
     {
       "question_id": "Q-04",
-      "model_answer": "일반 유흥주점은 지원 제외 대상 업종에 해당할 가능성이 높습니다. 따라서 상생성장지원자금 신청이 불가능할 것으로 보입니다.",
+      "model_answer": "제공된 정보에 따르면, 일반 유흥주점은 소상공인 정책자금의 지원 대상에서 제외됩니다. 따라서 상생성장지원자금 신청이 불가능합니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -50,7 +50,7 @@
     },
     {
       "question_id": "Q-05",
-      "model_answer": "온라인 판매를 하지 않고 오프라인 매장만 운영 중인 소상공인은 상생성장지원자금 신청이 불가능합니다. 지원대상은 온라인 플랫폼에 입점한 소상공인에 한정되기 때문입니다.",
+      "model_answer": "온라인 판매를 하지 않고 오프라인 매장만 운영 중인 경우, 상생성장지원자금 신청이 불가능합니다. 지원대상은 온라인 플랫폼에 입점한 소상공인에 한정되기 때문입니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -62,7 +62,7 @@
     },
     {
       "question_id": "Q-06",
-      "model_answer": "예, 지방세가 일부 체납되어 있으나 현재 징수유예 결정을 받은 상태라면 대출신청이 가능합니다.",
+      "model_answer": "네, 지방세가 일부 체납되어 있으나 현재 징수유예 결정을 받은 상태라면 대출신청이 가능합니다.",
       "normalized_answer": "yes",
       "gold_answer": "yes",
       "accuracy": true,
@@ -74,7 +74,7 @@
     },
     {
       "question_id": "Q-07",
-      "model_answer": "쿠팡과 상생협약을 맺어 추천을 받은 유망 소상공인이라면, ①-1 (상생형) 트랙으로 신청해야 합니다.",
+      "model_answer": "쿠팡과 상생협약을 맺어 추천을 받은 유망 소상공인은 ①-1 (상생형) 트랙으로 신청해야 합니다.",
       "normalized_answer": "selection_required",
       "gold_answer": "selection_required",
       "accuracy": true,
@@ -86,7 +86,7 @@
     },
     {
       "question_id": "Q-08",
-      "model_answer": "시설자금의 경우, 소상공인 정책자금을 3회 이상 지원받은 기업이라도 1회에 한해 추가 지원이 가능하므로, 이번에 시설자금으로 추가 신청이 가능합니다.",
+      "model_answer": "시설자금의 경우, 소상공인 정책자금을 3회 이상 지원받은 기업이라도 1회에 한해 추가 지원이 가능하므로, 신청이 가능합니다.",
       "normalized_answer": "yes",
       "gold_answer": "yes",
       "accuracy": true,
@@ -98,19 +98,19 @@
     },
     {
       "question_id": "Q-09",
-      "model_answer": "운수업의 상시 근로자 수 기준은 10명 미만이므로, 직원 8명을 둔 운수업 사업자는 이 기준을 충족합니다. 그러나 부업으로 공유오피스 임대업을 병행하는 경우, 주된 사업이 운수업이므로 자격이 됩니다. 따라서 자격이 있습니다.",
-      "normalized_answer": "yes",
+      "model_answer": "운수업의 경우 상시 근로자 수가 10명 미만이어야 하므로, 직원 8명을 둔 운수업 사업자는 자격이 됩니다. 그러나 부업으로 공유오피스 임대업을 병행하는 경우, 해당 업종이 지원 대상인지 여부에 따라 달라질 수 있습니다. 제공된 정보에서는 부업에 대한 구체적인 자격 요건이 명시되어 있지 않으므로, 추가적인 확인이 필요합니다.",
+      "normalized_answer": "운수업의 경우 상시 근로자 수가 10명 미만이어야 하므로, 직원 8명을 둔 운수업 사업자는 자격이 됩니다. 그러나 부업으로 공유오피스 임대업을 병행하는 경우, 해당 업종이 지원 대상인지 여부에 따라 달라질 수 있습니다. 제공된 정보에서는 부업에 대한 구체적인 자격 요건이 명시되어 있지 않으므로, 추가적인 확인이 필요합니다.",
       "gold_answer": "yes",
-      "accuracy": true,
-      "exact_match": true,
-      "token_f1": 1.0,
+      "accuracy": false,
+      "exact_match": false,
+      "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
       "num_retrieved": 5,
-      "error_type": null
+      "error_type": "partial_retrieval"
     },
     {
       "question_id": "Q-10",
-      "model_answer": "2개월 전 카드 대금 연체가 5일간 있었으나 지금은 모두 갚았다면, 신용 정보상 결격 사유에 해당하지 않습니다. 연체가 30일 이상 지속되지 않았기 때문입니다.",
+      "model_answer": "2개월 전 카드 대금 연체가 5일간 있었으나 지금은 모두 갚았다면, 신용 정보상 결격 사유에 해당하지 않습니다. 연체가 30일 이상 지속되거나 10일 이상 연체가 4회 이상 발생해야 결격 사유가 됩니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -134,8 +134,8 @@
     },
     {
       "question_id": "Q-12",
-      "model_answer": "제공된 정보에는 부동산업 중 공유오피스에 대한 구체적인 언급이 없으므로, 지원 대상 업종에 해당하는지 여부를 판단할 수 없습니다.",
-      "normalized_answer": "제공된 정보에는 부동산업 중 공유오피스에 대한 구체적인 언급이 없으므로, 지원 대상 업종에 해당하는지 여부를 판단할 수 없습니다.",
+      "model_answer": "제공된 맥락에 따르면, 부동산업은 지원 대상 업종에 포함되지 않습니다. 따라서 공유오피스를 운영하는 경우 지원 대상이 아닙니다.",
+      "normalized_answer": "no",
       "gold_answer": "yes",
       "accuracy": false,
       "exact_match": false,
@@ -158,19 +158,19 @@
     },
     {
       "question_id": "Q-14",
-      "model_answer": "제공된 맥락에서는 특별재난지역에 소재한 약국에 대한 지원 가능성에 대한 정보가 없습니다. 따라서, 해당 약국이 제외 업종이지만 예외적으로 지원이 가능한지에 대한 답변은 없습니다.",
-      "normalized_answer": "no",
+      "model_answer": "제공된 맥락에서는 특별재난지역에 소재한 약국에 대한 지원 가능성에 대한 정보가 없습니다. 따라서, 해당 질문에 대한 답변은 없습니다.",
+      "normalized_answer": "yes",
       "gold_answer": "yes",
-      "accuracy": false,
-      "exact_match": false,
-      "token_f1": 0.0,
+      "accuracy": true,
+      "exact_match": true,
+      "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
       "num_retrieved": 5,
-      "error_type": "retrieval_failure"
+      "error_type": null
     },
     {
       "question_id": "Q-15",
-      "model_answer": "신청이 가능합니다. 체납처분유예(압류‧매각유예) 또는 징수특례의 경우 대출신청이 가능하다고 명시되어 있습니다.",
+      "model_answer": "신청 가능합니다. '징수유예'의 경우 대출신청이 가능하다고 명시되어 있습니다.",
       "normalized_answer": "yes",
       "gold_answer": "yes",
       "accuracy": true,
@@ -182,8 +182,8 @@
     },
     {
       "question_id": "Q-16",
-      "model_answer": "네, 최근 3개월 내에 15일간 연체가 1회 발생한 경우, 신청이 제한됩니다.",
-      "normalized_answer": "네, 최근 3개월 내에 15일간 연체가 1회 발생한 경우, 신청이 제한됩니다.",
+      "model_answer": "제공된 맥락에 따르면, 최근 3개월 이내에 10일 이상 연체가 4회 이상 발생한 경우에 해당하지 않으므로, 15일간 연체가 1회 있었던 경우에는 신청이 제한되지 않습니다.",
+      "normalized_answer": "제공된 맥락에 따르면, 최근 3개월 이내에 10일 이상 연체가 4회 이상 발생한 경우에 해당하지 않으므로, 15일간 연체가 1회 있었던 경우에는 신청이 제한되지 않습니다.",
       "gold_answer": "no",
       "accuracy": false,
       "exact_match": false,
@@ -194,19 +194,19 @@
     },
     {
       "question_id": "Q-17",
-      "model_answer": "신청 자격이 없습니다. 부채비율이 700%를 초과하는 경우, 업력 7년 이하 업체에 대해서는 적용하지 않지만, 부채비율이 800%인 경우에는 지원이 불가능합니다.",
-      "normalized_answer": "no",
+      "model_answer": "부채비율이 800%인 경우, 일반적으로 지원이 제한되지만, 업력 7년 이하 업체에 대해서는 적용되지 않으므로 신청 자격이 있습니다.",
+      "normalized_answer": "yes",
       "gold_answer": "yes",
-      "accuracy": false,
-      "exact_match": false,
-      "token_f1": 0.0,
+      "accuracy": true,
+      "exact_match": true,
+      "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
       "num_retrieved": 5,
-      "error_type": "reasoning_failure"
+      "error_type": null
     },
     {
       "question_id": "Q-18",
-      "model_answer": "제공된 맥락에 따르면, 법인격이 없는 친목 조합 형태의 사업자는 지원 대상이 아닙니다. 지원 대상은 소상공인으로 정의된 법인이나 사업체에 해당해야 합니다.",
+      "model_answer": "제공된 맥락에 따르면, 법인격이 없는 친목 조합 형태의 사업자는 지원 대상이 아닙니다. 지원은 개인과세사업자, 개인면세사업자, 영리법인 본점에 해당하는 경우에 한정되며, 비영리사업자는 지원 제외됩니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
@@ -230,7 +230,7 @@
     },
     {
       "question_id": "Q-20",
-      "model_answer": "네, 25년 TOPS 프로그램에 선정되었다면 TOPS형으로 신청 가능합니다.",
+      "model_answer": "네, 25년 TOPS 프로그램 1단계(플랫폼 진출)에 선정되었다면 TOPS형으로 신청 가능합니다.",
       "normalized_answer": "selection_required",
       "gold_answer": "no",
       "accuracy": false,
@@ -241,42 +241,38 @@
       "error_type": "reasoning_failure"
     }
   ],
-  "accuracy": 0.7,
+  "accuracy": 0.75,
   "rule_retrieval_rate": 0.0,
   "num_questions": 20,
   "error_type_counts": {
-    "other": 14,
-    "reasoning_failure": 3,
-    "retrieval_failure": 2,
+    "other": 15,
+    "partial_retrieval": 1,
+    "reasoning_failure": 2,
+    "retrieval_failure": 1,
     "normalization_failure": 1
   },
   "config": {
-    "chunking": {
-      "chunk_size": 512,
-      "chunk_overlap": 64
-    },
-    "embedding": {
-      "model": "text-embedding-3-small",
-      "dimension": 1536
-    },
-    "retrieval": {
-      "top_k": 5
-    },
-    "generation": {
-      "model": "gpt-4o-mini",
-      "temperature": 0
-    },
+    "embedding_model": "text-embedding-3-small",
+    "embedding_dimension": null,
+    "llm_model": "gpt-4o-mini",
+    "temperature": 0,
     "paths": {
       "raw": "C:\\aiproject\\policy-rag-study\\data\\raw",
-      "processed": "C:\\aiproject\\policy-rag-study\\data\\processed",
+      "processed": "C:\\aiproject\\policy-rag-study\\data\\processed_overlap_128",
       "dataset": "C:\\aiproject\\policy-rag-study\\data\\dataset",
-      "chunks_path": "C:\\aiproject\\policy-rag-study\\data\\processed\\chunks_chunk512.json",
-      "chunk_meta_path": "C:\\aiproject\\policy-rag-study\\data\\processed\\chunk_meta_chunk512.json",
-      "index_dir": "C:\\aiproject\\policy-rag-study\\data\\indexes\\chunk512",
+      "indexes": "C:\\aiproject\\policy-rag-study\\data\\indexes_overlap_128",
+      "experiments": "C:\\aiproject\\policy-rag-study\\experiments",
+      "results": "C:\\aiproject\\policy-rag-study\\results",
+      "output_dir": "C:\\aiproject\\policy-rag-study\\experiments\\overlap_128_topk_5",
+      "chunks_path": "C:\\aiproject\\policy-rag-study\\data\\processed_overlap_128\\chunks.json",
+      "index_dir": "C:\\aiproject\\policy-rag-study\\data\\indexes_overlap_128",
       "questions_path": "C:\\aiproject\\policy-rag-study\\data\\dataset\\questions.json",
-      "gold_path": "C:\\aiproject\\policy-rag-study\\data\\dataset\\gold_answers.json",
-      "output_dir": "C:\\aiproject\\policy-rag-study\\experiments\\chunk_size\\chunk512"
-    }
+      "gold_path": "C:\\aiproject\\policy-rag-study\\data\\dataset\\gold_answers.json"
+    },
+    "chunk_size": 512,
+    "chunk_overlap": 128,
+    "top_k": 5,
+    "use_retrieval": true
   },
-  "timestamp": "2026-03-23T08:49:02.019478Z"
+  "timestamp": "2026-03-26T06:57:08.773974Z"
 }

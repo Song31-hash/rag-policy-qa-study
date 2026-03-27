@@ -1,0 +1,20 @@
+embedding_model: text-embedding-3-small
+embedding_dimension: null
+llm_model: gpt-4o-mini
+temperature: 0
+paths:
+  raw: data/raw
+  processed: data/processed
+  dataset: data/dataset
+  indexes: data/indexes
+  experiments: experiments
+  results: results
+  output_dir: experiments/topk_5
+  chunks_path: data/processed/chunks.json
+  index_dir: data/indexes
+  questions_path: data/dataset/questions.json
+  gold_path: data/dataset/gold_answers.json
+chunk_size: 512
+chunk_overlap: 64
+top_k: 5
+use_retrieval: true

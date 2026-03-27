@@ -129,7 +129,8 @@ def run(
         )
 
         context = "\n\n---\n\n".join(c["text"] for c in retrieved)
-        answer = generate(question_text, context, llm_model, temperature, api_key)
+        prompt_mode = config.get("prompt_mode", "baseline")
+        answer = generate(question_text, context, llm_model, temperature, api_key, prompt_mode=prompt_mode)
 
         results.append(
             {

@@ -2,38 +2,38 @@
   "per_item": [
     {
       "question_id": "Q-01",
-      "model_answer": "아니요, 제조업의 경우 상시 근로자 수 기준이 10명 미만이므로, 상시 근로자가 10명인 개인사업자는 지원 대상이 아닙니다.",
+      "model_answer": "신청할 수 없습니다. 제조업의 경우 상시 근로자 수 기준이 10인 미만이기 때문에, 10명의 상시 근로자를 두고 있는 개인사업자는 지원 대상에 해당하지 않습니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
       "question_id": "Q-02",
-      "model_answer": "아니요, 직원 6명을 둔 음식점은 소상공인 기준에 부합하지 않습니다. 음식점은 상시 근로자 수 기준이 5명 미만이어야 하므로, 6명은 초과합니다.",
+      "model_answer": "아니요, 음식점은 소상공인 기준에 따라 상시 근로자 수가 5인 미만이어야 하므로, 6명을 둔 음식점은 신청이 불가능합니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
       "question_id": "Q-03",
-      "model_answer": "비영리 기업은 소상공인 정책자금 지원 대상에서 제외되므로, 지역 소상공인들이 모여 만든 비영리 사회적 협동조합은 지원 대상이 되지 않습니다.",
+      "model_answer": "지원 대상이 아닙니다. 비영리 사업자는 지원 제외로 명시되어 있습니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
@@ -45,19 +45,19 @@
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
       "question_id": "Q-05",
-      "model_answer": "온라인 판매를 하지 않고 오프라인 매장만 운영 중인 소상공인은 상생성장지원자금 신청이 불가능합니다. 지원대상은 온라인 플랫폼에 입점한 소상공인에 한정되기 때문입니다.",
+      "model_answer": "온라인 판매를 하지 않고 오프라인 매장만 운영 중인 소상공인은 상생성장지원자금 신청이 불가능합니다. 지원대상은 온라인 플랫폼에 입점한 소상공인으로 제한되어 있습니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
@@ -69,19 +69,19 @@
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
       "question_id": "Q-07",
-      "model_answer": "쿠팡과 상생협약을 맺어 추천을 받은 유망 소상공인이라면, ①-1 (상생형) 트랙으로 신청해야 합니다.",
+      "model_answer": "쿠팡과 상생협약을 맺어 추천을 받은 유망 소상공인은 ①-1 (상생형) 트랙으로 신청해야 합니다.",
       "normalized_answer": "selection_required",
       "gold_answer": "selection_required",
       "accuracy": true,
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
@@ -93,19 +93,19 @@
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
       "question_id": "Q-09",
-      "model_answer": "운수업의 상시 근로자 수 기준은 10명 미만이므로, 직원 8명을 둔 운수업 사업자는 이 기준을 충족합니다. 그러나 부업으로 공유오피스 임대업을 병행하는 경우, 주된 사업이 운수업이므로 자격이 됩니다. 따라서 자격이 있습니다.",
+      "model_answer": "제공된 정보에 따르면, 직원 수가 12명 이하인 경우에는 대출 신청이 가능하므로, 직원 8명을 둔 운수업 사업자는 자격이 될 수 있습니다. 그러나 부업으로 공유오피스 임대업을 병행하는 경우, 해당 업종이 대출 제한 대상에 해당하는지 여부에 따라 달라질 수 있습니다. 추가적인 정보가 필요합니다.",
       "normalized_answer": "yes",
       "gold_answer": "yes",
       "accuracy": true,
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
@@ -117,31 +117,31 @@
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
       "question_id": "Q-11",
-      "model_answer": "아니요, 건설업체의 경우 상시 근로자 수 기준은 10명 미만이므로, 직원이 9명인 경우 기준을 충족하지 않습니다.",
+      "model_answer": "아니요, 건설업체의 경우 상시 근로자 수 기준은 10인 미만이어야 하므로, 직원이 9명인 경우 기준을 충족하지 않습니다.",
       "normalized_answer": "no",
       "gold_answer": "yes",
       "accuracy": false,
       "exact_match": false,
       "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": "reasoning_failure"
     },
     {
       "question_id": "Q-12",
-      "model_answer": "제공된 정보에는 부동산업 중 공유오피스에 대한 구체적인 언급이 없으므로, 지원 대상 업종에 해당하는지 여부를 판단할 수 없습니다.",
-      "normalized_answer": "제공된 정보에는 부동산업 중 공유오피스에 대한 구체적인 언급이 없으므로, 지원 대상 업종에 해당하는지 여부를 판단할 수 없습니다.",
+      "model_answer": "제공된 맥락에는 부동산업 중 공유오피스에 대한 구체적인 언급이 없으므로, 지원 대상 업종에 해당하는지 여부를 판단할 수 없습니다.",
+      "normalized_answer": "제공된 맥락에는 부동산업 중 공유오피스에 대한 구체적인 언급이 없으므로, 지원 대상 업종에 해당하는지 여부를 판단할 수 없습니다.",
       "gold_answer": "yes",
       "accuracy": false,
       "exact_match": false,
       "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": "retrieval_failure"
     },
     {
@@ -153,20 +153,20 @@
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
       "question_id": "Q-14",
-      "model_answer": "제공된 맥락에서는 특별재난지역에 소재한 약국에 대한 지원 가능성에 대한 정보가 없습니다. 따라서, 해당 약국이 제외 업종이지만 예외적으로 지원이 가능한지에 대한 답변은 없습니다.",
-      "normalized_answer": "no",
+      "model_answer": "제공된 맥락에서는 특별재난지역에 소재한 약국에 대한 지원 가능성에 대한 정보가 없습니다. 따라서, 해당 질문에 대한 답변은 없습니다.",
+      "normalized_answer": "yes",
       "gold_answer": "yes",
-      "accuracy": false,
-      "exact_match": false,
-      "token_f1": 0.0,
+      "accuracy": true,
+      "exact_match": true,
+      "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
-      "error_type": "retrieval_failure"
+      "num_retrieved": 3,
+      "error_type": null
     },
     {
       "question_id": "Q-15",
@@ -177,43 +177,43 @@
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
       "question_id": "Q-16",
-      "model_answer": "네, 최근 3개월 내에 15일간 연체가 1회 발생한 경우, 신청이 제한됩니다.",
-      "normalized_answer": "네, 최근 3개월 내에 15일간 연체가 1회 발생한 경우, 신청이 제한됩니다.",
+      "model_answer": "신청이 제한됩니다. 최근 3개월 이내에 10일 이상 연체가 4회 이상 발생한 경우에 해당하지 않지만, 15일간 연체가 1회 있었기 때문에 연체로 간주되어 대출 신청이 제한됩니다.",
+      "normalized_answer": "신청이 제한됩니다. 최근 3개월 이내에 10일 이상 연체가 4회 이상 발생한 경우에 해당하지 않지만, 15일간 연체가 1회 있었기 때문에 연체로 간주되어 대출 신청이 제한됩니다.",
       "gold_answer": "no",
       "accuracy": false,
       "exact_match": false,
       "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": "normalization_failure"
     },
     {
       "question_id": "Q-17",
-      "model_answer": "신청 자격이 없습니다. 부채비율이 700%를 초과하는 경우, 업력 7년 이하 업체에 대해서는 적용하지 않지만, 부채비율이 800%인 경우에는 지원이 불가능합니다.",
+      "model_answer": "부채비율이 700%를 초과하므로 신청 자격이 없습니다.",
       "normalized_answer": "no",
       "gold_answer": "yes",
       "accuracy": false,
       "exact_match": false,
       "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": "reasoning_failure"
     },
     {
       "question_id": "Q-18",
-      "model_answer": "제공된 맥락에 따르면, 법인격이 없는 친목 조합 형태의 사업자는 지원 대상이 아닙니다. 지원 대상은 소상공인으로 정의된 법인이나 사업체에 해당해야 합니다.",
+      "model_answer": "아니요, 법인격이 없는 친목 조합 형태의 사업자는 지원 대상이 아닙니다.",
       "normalized_answer": "no",
       "gold_answer": "no",
       "accuracy": true,
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
@@ -225,58 +225,53 @@
       "exact_match": true,
       "token_f1": 1.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": null
     },
     {
       "question_id": "Q-20",
-      "model_answer": "네, 25년 TOPS 프로그램에 선정되었다면 TOPS형으로 신청 가능합니다.",
+      "model_answer": "네, 25년 TOPS 프로그램 1단계(플랫폼 진출)에 선정되었다면 TOPS형으로 신청 가능합니다.",
       "normalized_answer": "selection_required",
       "gold_answer": "no",
       "accuracy": false,
       "exact_match": false,
       "token_f1": 0.0,
       "retrieved_contains_correct_rule": false,
-      "num_retrieved": 5,
+      "num_retrieved": 3,
       "error_type": "reasoning_failure"
     }
   ],
-  "accuracy": 0.7,
+  "accuracy": 0.75,
   "rule_retrieval_rate": 0.0,
   "num_questions": 20,
   "error_type_counts": {
-    "other": 14,
+    "other": 15,
     "reasoning_failure": 3,
-    "retrieval_failure": 2,
+    "retrieval_failure": 1,
     "normalization_failure": 1
   },
   "config": {
-    "chunking": {
-      "chunk_size": 512,
-      "chunk_overlap": 64
-    },
-    "embedding": {
-      "model": "text-embedding-3-small",
-      "dimension": 1536
-    },
-    "retrieval": {
-      "top_k": 5
-    },
-    "generation": {
-      "model": "gpt-4o-mini",
-      "temperature": 0
-    },
+    "embedding_model": "text-embedding-3-small",
+    "embedding_dimension": null,
+    "llm_model": "gpt-4o-mini",
+    "temperature": 0,
     "paths": {
       "raw": "C:\\aiproject\\policy-rag-study\\data\\raw",
-      "processed": "C:\\aiproject\\policy-rag-study\\data\\processed",
+      "processed": "C:\\aiproject\\policy-rag-study\\data\\processed_overlap_0",
       "dataset": "C:\\aiproject\\policy-rag-study\\data\\dataset",
-      "chunks_path": "C:\\aiproject\\policy-rag-study\\data\\processed\\chunks_chunk512.json",
-      "chunk_meta_path": "C:\\aiproject\\policy-rag-study\\data\\processed\\chunk_meta_chunk512.json",
-      "index_dir": "C:\\aiproject\\policy-rag-study\\data\\indexes\\chunk512",
+      "indexes": "C:\\aiproject\\policy-rag-study\\data\\indexes_overlap_0",
+      "experiments": "C:\\aiproject\\policy-rag-study\\experiments",
+      "results": "C:\\aiproject\\policy-rag-study\\results",
+      "output_dir": "C:\\aiproject\\policy-rag-study\\experiments\\overlap_0_topk_3",
+      "chunks_path": "C:\\aiproject\\policy-rag-study\\data\\processed_overlap_0\\chunks.json",
+      "index_dir": "C:\\aiproject\\policy-rag-study\\data\\indexes_overlap_0",
       "questions_path": "C:\\aiproject\\policy-rag-study\\data\\dataset\\questions.json",
-      "gold_path": "C:\\aiproject\\policy-rag-study\\data\\dataset\\gold_answers.json",
-      "output_dir": "C:\\aiproject\\policy-rag-study\\experiments\\chunk_size\\chunk512"
-    }
+      "gold_path": "C:\\aiproject\\policy-rag-study\\data\\dataset\\gold_answers.json"
+    },
+    "chunk_size": 512,
+    "chunk_overlap": 0,
+    "top_k": 3,
+    "use_retrieval": true
   },
-  "timestamp": "2026-03-23T08:49:02.019478Z"
+  "timestamp": "2026-03-26T06:48:21.676865Z"
 }
