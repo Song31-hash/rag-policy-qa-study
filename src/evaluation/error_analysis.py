@@ -81,7 +81,6 @@ def _extract_domain_cues(text: str) -> list[str]:
         if _normalize_text(cue) in norm:
             found.append(cue)
 
-    # 숫자 + 단위 패턴 추가 추출
     numeric_patterns = [
         r"\d+\s*명\s*미만",
         r"\d+\s*일\s*이상",
@@ -94,7 +93,6 @@ def _extract_domain_cues(text: str) -> list[str]:
         for match in re.findall(pattern, norm):
             found.append(match)
 
-    # 순서 보존 + 중복 제거
     dedup = []
     seen = set()
     for x in found:
@@ -112,10 +110,10 @@ def infer_retrieval_status(
 ) -> str:
     """
     retrieval 상태를 success / partial / failure / unknown 으로 판정.
-    기준:
-    - gold reasoning_point/question에서 핵심 cue 추출
-    - retrieved text에 얼마나 포함되는지 확인
     """
+    if not retrieved_chunks:
+        return "not_applicable"
+
     retrieved_text = _normalize_text(_join_retrieved_texts(retrieved_chunks))
     reasoning = _safe_str(gold.get("reasoning_point", ""))
     question = _safe_str(gold.get("question", ""))
@@ -135,10 +133,6 @@ def infer_retrieval_status(
     n_total = len(cues)
     n_matched = len(matched)
 
-    # 매우 단순한 휴리스틱:
-    # - 핵심 cue가 충분히 많이 보이면 success
-    # - 일부만 보이면 partial
-    # - 거의 없으면 failure
     if n_total <= 2:
         if n_matched >= 1:
             return "success"
@@ -154,9 +148,6 @@ def infer_retrieval_status(
 
 
 def _is_unclassified_decision(normalized_answer: str) -> bool:
-    """
-    yes / no / selection_required 중 하나로 정규화되지 않은 경우.
-    """
     return _safe_str(normalized_answer) not in ALLOWED_DECISIONS
 
 
@@ -174,10 +165,10 @@ def classify_error_type(
     - partial_retrieval
     - reasoning_failure
     - normalization_failure
+    - no_retrieval_setting
     - other
     - None (정답이면)
     """
-    # 외부에서 명시적으로 준 manual label이 있으면 우선 사용
     if error_type_manual is not None:
         manual = _safe_str(error_type_manual).strip()
         if manual and manual.lower() != "nan":
@@ -186,26 +177,29 @@ def classify_error_type(
     normalized_answer = _safe_str(normalized_answer)
     gold_answer = _safe_str(gold_answer)
 
-    # 정답이면 에러 없음
     if normalized_answer == gold_answer:
         return None
 
+    # 1) 먼저 정규화 실패 확인
+    if _is_unclassified_decision(normalized_answer):
+        return "normalization_failure"
+
     retrieval_status = infer_retrieval_status(retrieved_chunks, gold)
 
-    # 1) retrieval 자체 실패
+    # 2) retrieval 자체가 없는 설정 (e.g. vanilla)
+    if retrieval_status == "not_applicable":
+        return "reasoning_failure"
+
+    # 3) retrieval 실패
     if retrieval_status == "failure":
         return "retrieval_failure"
 
-    # 2) 일부만 가져온 경우
+    # 4) 일부만 가져온 경우
     if retrieval_status == "partial":
         return "partial_retrieval"
 
-    # 3) retrieval은 성공했는데 decision enum으로 못 떨어짐
-    if retrieval_status == "success" and _is_unclassified_decision(normalized_answer):
-        return "normalization_failure"
-
-    # 4) retrieval은 성공했는데 정답 판단을 잘못함
-    if retrieval_status == "success" and normalized_answer in ALLOWED_DECISIONS and normalized_answer != gold_answer:
+    # 5) retrieval은 성공했는데 decision 판단을 잘못함
+    if retrieval_status in {"success", "unknown"} and normalized_answer in ALLOWED_DECISIONS:
         return "reasoning_failure"
 
     return "other"
@@ -214,14 +208,14 @@ def classify_error_type(
 def aggregate_error_types(per_item: list[dict[str, Any]]) -> dict[str, int]:
     """
     per_item 평가 결과에서 error_type 빈도 집계.
-    None은 other로 세지 않고 제외.
+    None은 정답으로 간주하여 별도 success로 집계.
     """
     counter = Counter()
 
     for item in per_item:
         err = item.get("error_type", None)
         if err is None:
-            counter["other"] += 1
+            counter["success"] += 1
         else:
             counter[_safe_str(err)] += 1
 

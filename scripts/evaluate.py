@@ -128,8 +128,14 @@ def main():
         eval_result["config"] = load_yaml(config_path)
 
     save_json(eval_result, experiment_path / "evaluation.json")
+    rr = eval_result.get("rule_retrieval_rate")
 
-    print(f"Accuracy: {eval_result['accuracy']:.4f}, Rule retrieval: {eval_result['rule_retrieval_rate']:.4f}")
+    if rr is None:
+        rr_str = "N/A"
+    else:
+        rr_str = f"{rr:.4f}"
+
+    print(f"Accuracy: {eval_result['accuracy']:.4f}, Rule retrieval: {rr_str}")
     print(f"Saved: {experiment_path / 'evaluation.json'}")
 
 

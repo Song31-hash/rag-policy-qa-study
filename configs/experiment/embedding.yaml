@@ -1,4 +1,0 @@
-# 실험: embedding 모델 변인 (설정 예시)
-_base_: "../rag.yaml"
-# embedding_model: "text-embedding-3-small"  # baseline
-# embedding_model: "BAAI/bge-base-en-v1.5"   # 별도 embedder 구현 시

@@ -1,4 +1,0 @@
-﻿chunk_size,accuracy,rule_retrieval_rate,num_questions
-256,0.65,0.0,20
-512,0.7,0.0,20
-1024,0.65,0.0,20

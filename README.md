@@ -2,26 +2,30 @@
 
 A research project investigating the limitations of Retrieval-Augmented Generation (RAG) for policy QA, showing that improving retrieval alone is insufficient without robust rule-based reasoning.
 
+---
+
 ## Overview
 
-This project investigates the effectiveness and limitations of Retrieval-Augmented Generation (RAG) for policy-based question answering (QA), focusing on rule-based decision tasks.
+This project evaluates the effectiveness of Retrieval-Augmented Generation (RAG) for policy-based question answering (QA), with a focus on rule-based decision tasks.
 
 Unlike general QA, policy QA requires strict application of rules, including threshold conditions, exception handling, and multi-step reasoning.
 
-This study goes beyond simple RAG evaluation and analyzes how retrieval configurations (chunk size, top-k, and overlap) and reasoning limitations affect performance.
+This study analyzes how retrieval configurations (chunk size, top-k, and overlap) affect performance and identifies the primary sources of error.
 
-- Vanilla LLM: 0.55 accuracy  
-- RAG (baseline): 0.70 accuracy  
-- Best configuration (overlap=64, top-k=5): **0.80 accuracy**
+### Key Results
 
-**Key Insight:**  
-Improving retrieval alone is insufficient for policy QA; the primary bottleneck lies in rule-based reasoning rather than information access.
+- Vanilla LLM: **0.60 accuracy**
+- RAG (baseline): **0.75 accuracy**
+- RAG + CoT: **up to 0.85 accuracy**
+
+### Key Insight
+
+Improving retrieval alone is not sufficient for policy QA.  
+The primary bottleneck lies in **rule-based reasoning and answer normalization**, rather than information access.
 
 ---
 
 ## Research Questions
-
-This study investigates:
 
 1. Does RAG improve policy QA accuracy compared to a vanilla LLM?
 2. How do retrieval configurations (chunk size, top-k, overlap) affect performance?
@@ -40,9 +44,8 @@ Each question evaluates:
 
 - Threshold boundary conditions
 - Exception rules
-- Industry restrictions
-- Financial eligibility conditions
 - Multi-condition reasoning
+- Program track selection
 
 Ground truth answers were manually verified.
 
@@ -52,11 +55,11 @@ Ground truth answers were manually verified.
 
 ### Vanilla LLM
 
-`Question → LLM → Answer`
+Question → LLM → Answer
 
 ### RAG-based LLM
 
-`Question → Embedding → FAISS → Top-k Chunks → LLM → Answer`
+Question → Embedding → FAISS → Top-k Chunks → LLM → Answer
 
 Pipeline components:
 
@@ -70,8 +73,6 @@ Pipeline components:
 ---
 
 ## Experiments
-
-We systematically evaluate key RAG components:
 
 ### 1. Chunk Size
 - 256 / 512 / 1024
@@ -93,33 +94,26 @@ We systematically evaluate key RAG components:
 
 | Model | Accuracy |
 |------|--------|
-| Vanilla LLM | 0.55 |
-| RAG (512) | 0.70 |
+| Vanilla LLM | 0.60 |
+| RAG (512) | 0.75 |
+
+→ RAG significantly improves performance on policy QA.
 
 ---
 
 ### Top-k Effect
 
-| Top-k | Accuracy |
-|------|--------|
-| 1 | 0.65 |
-| 3 | 0.70 |
-| 5 | 0.80 |
-| 10 | 0.80 |
-
-→ Increasing top-k improves recall but saturates after k=5.
+- Performance is highly sensitive to retrieval depth
+- **Top-k=5 provides the most stable results**
+- Larger top-k introduces noise without further gains
 
 ---
 
 ### Overlap Effect
 
-| Overlap | Accuracy |
-|--------|--------|
-| 0 | 0.65 |
-| 64 | 0.80 |
-| 128 | 0.80 |
-
-→ Overlap reduces rule fragmentation and significantly improves performance.
+- Overlap improves performance when combined with appropriate top-k
+- Best results observed at **overlap=64–128 with top-k=5**
+- Effect is **not monotonic** and depends on retrieval depth
 
 ---
 
@@ -127,11 +121,11 @@ We systematically evaluate key RAG components:
 
 | Overlap \ Top-k | 3 | 5 | 10 |
 |----------------|---|---|----|
-| 0 | 0.60 | 0.65 | 0.65 |
-| 64 | 0.70 | **0.80** | 0.80 |
-| 128 | 0.70 | 0.80 | 0.75 |
+| 0 | 0.75 | 0.70 | 0.65 |
+| 64 | 0.55 | 0.75 | 0.65 |
+| 128 | 0.60 | 0.75 | 0.65 |
 
-→ Optimal configuration: **overlap=64, top-k=5**
+→ High performance is consistently observed around **top-k=5**
 
 ---
 
@@ -139,41 +133,39 @@ We systematically evaluate key RAG components:
 
 | Setting | Accuracy |
 |--------|--------|
-| Baseline | 0.80 |
-| + CoT | ~0.82 |
+| Baseline (top-k=5, overlap=64) | 0.75 |
+| + CoT | 0.85 |
 
-→ CoT provides minor improvements but does not fully resolve reasoning errors.
+→ Chain-of-Thought significantly improves performance  
+→ However, it **does not fully resolve reasoning errors**
 
 ---
 
 ## Error Analysis
 
-Key error types:
+Main error types:
 
-- **Retrieval Failure**
-- **Partial Retrieval**
 - **Reasoning Failure**
 - **Normalization Failure**
 
-Findings:
+Key findings:
 
-- RAG reduces hallucination errors significantly
-- Remaining errors are dominated by reasoning failures
-- Boundary conditions and exception rules are the hardest cases
+- Errors are not primarily caused by retrieval failure
+- Even with correct context, models often fail to apply rules correctly
+- Boundary conditions and exception rules are the most challenging cases
 
 ---
 
 ## Key Findings
 
-- Retrieval improves performance, but is not sufficient
-- Chunk size, overlap, and top-k critically affect performance
-- There exists an optimal retrieval configuration
+- RAG improves performance but is not sufficient
+- Retrieval configuration (top-k, overlap) significantly affects results
+- **Top-k is a more stable factor than overlap**
 - Policy QA is fundamentally a **rule-based reasoning problem**
 
 ---
 
 ## Project Structure
-
 
 policy-rag-study/
 ├── configs/
@@ -182,7 +174,6 @@ policy-rag-study/
 ├── scripts/
 ├── experiments/
 ├── results/
-
 
 ---
 
@@ -198,25 +189,21 @@ policy-rag-study/
 
 ## Usage
 
-1. Install dependencies
+### 1. Install dependencies
 
 pip install -r requirements.txt
 
-
-2. Set API key
+### 2. Set API key
 
 export OPENAI_API_KEY=...
 
-
-3. Build index
+### 3. Build index
 
 python scripts/ingest_policy.py --config configs/rag.yaml
 
-
-4. Run experiments
+### 4. Run experiments
 
 python scripts/run_rag.py --config configs/rag.yaml
-
 
 ---
 
