@@ -167,13 +167,168 @@ Key findings:
 
 ## Project Structure
 
+```text
 policy-rag-study/
+│
+├── README.md
+├── paper.md
+├── requirements.txt
+├── .gitignore
+│
 ├── configs/
+│   ├── rag.yaml
+│   ├── vanilla.yaml
+│   └── experiment/
+│       ├── overlap_0_topk_3.yaml
+│       ├── overlap_0_topk_5.yaml
+│       ├── overlap_0_topk_10.yaml
+│       ├── overlap_64_topk_3.yaml
+│       ├── overlap_64_topk_5.yaml
+│       ├── overlap_64_topk_10.yaml
+│       ├── overlap_128_topk_3.yaml
+│       ├── overlap_128_topk_5.yaml
+│       ├── overlap_128_topk_10.yaml
+│       └── topk_5_cot.yaml
+│
 ├── data/
+│   ├── raw/
+│   │   └── policy.docx
+│   │
+│   ├── dataset/
+│   │   ├── questions.json
+│   │   └── gold_answers.json
+│   │
+│   ├── processed/
+│   │   ├── chunks.json
+│   │   └── chunk_meta.json
+│   │
+│   ├── processed_overlap_0/
+│   │   ├── chunks.json
+│   │   └── chunk_meta.json
+│   │
+│   ├── processed_overlap_64/
+│   │   ├── chunks.json
+│   │   └── chunk_meta.json
+│   │
+│   ├── processed_overlap_128/
+│   │   ├── chunks.json
+│   │   └── chunk_meta.json
+│   │
+│   ├── indexes/
+│   │   ├── index.faiss
+│   │   └── embeddings.npy
+│   │
+│   ├── indexes_overlap_0/
+│   │   ├── index.faiss
+│   │   └── embeddings.npy
+│   │
+│   ├── indexes_overlap_64/
+│   │   ├── index.faiss
+│   │   └── embeddings.npy
+│   │
+│   └── indexes_overlap_128/
+│       ├── index.faiss
+│       └── embeddings.npy
+│
 ├── src/
+│   ├── dataset/
+│   │   └── dataset_loader.py
+│   │
+│   ├── retrieval/
+│   │   ├── chunker.py
+│   │   ├── embedder.py
+│   │   ├── faiss_index.py
+│   │   └── retriever.py
+│   │
+│   ├── generation/
+│   │   └── generator.py
+│   │
+│   ├── evaluation/
+│   │   ├── answer_eval.py
+│   │   ├── error_analysis.py
+│   │   ├── evaluator.py
+│   │   └── retrieval_eval.py
+│   │
+│   ├── pipelines/
+│   │   ├── rag_pipeline.py
+│   │   └── vanilla_pipeline.py
+│   │
+│   └── utils/
+│       └── io.py
+│
 ├── scripts/
+│   ├── ingest_policy.py
+│   ├── run_rag.py
+│   ├── run_vanilla.py
+│   ├── evaluate.py
+│   ├── make_summary_csv.py
+│   └── plot_from_summary.py
+│
 ├── experiments/
+│   ├── vanilla/
+│   │   ├── predictions.json
+│   │   └── evaluation.json
+│   │
+│   ├── overlap_0_topk_3/
+│   │   ├── config.yaml
+│   │   ├── predictions.json
+│   │   └── evaluation.json
+│   │
+│   ├── overlap_0_topk_5/
+│   │   ├── config.yaml
+│   │   ├── predictions.json
+│   │   └── evaluation.json
+│   │
+│   ├── overlap_0_topk_10/
+│   │   ├── config.yaml
+│   │   ├── predictions.json
+│   │   └── evaluation.json
+│   │
+│   ├── overlap_64_topk_3/
+│   │   ├── config.yaml
+│   │   ├── predictions.json
+│   │   └── evaluation.json
+│   │
+│   ├── overlap_64_topk_5/
+│   │   ├── config.yaml
+│   │   ├── predictions.json
+│   │   └── evaluation.json
+│   │
+│   ├── overlap_64_topk_10/
+│   │   ├── config.yaml
+│   │   ├── predictions.json
+│   │   └── evaluation.json
+│   │
+│   ├── overlap_128_topk_3/
+│   │   ├── config.yaml
+│   │   ├── predictions.json
+│   │   └── evaluation.json
+│   │
+│   ├── overlap_128_topk_5/
+│   │   ├── config.yaml
+│   │   ├── predictions.json
+│   │   └── evaluation.json
+│   │
+│   ├── overlap_128_topk_10/
+│   │   ├── config.yaml
+│   │   ├── predictions.json
+│   │   └── evaluation.json
+│   │
+│   └── topk_5_cot/
+│       ├── config.yaml
+│       ├── predictions.json
+│       └── evaluation.json
+│
 ├── results/
+│   └── summary.csv
+│
+└── figures/
+    ├── chunk_size_accuracy.png
+    ├── fixed_vs_adaptive_accuracy.png
+    ├── heatmap.png
+    ├── overlap_plot.png
+    └── topk_plot.png
+```
 
 ---
 
