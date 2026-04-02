@@ -113,15 +113,6 @@ All experiments store:
 
 ---
 
-## Repository
-
-https://github.com/your-repo-link
-
-The repository provides a fully reproducible experimental pipeline,
-including all configurations, predictions, and evaluation results used in this study.
-
----
-
 ## Contribution
 
 **Technical**
